@@ -1,4 +1,13 @@
 .profile__addbutton{
   display: flex;
   margin-left: auto;
+  padding: 14px 64px;
+  border: solid 2px #fff;
+  xheight: 50px;
+}
+
+@media screen and (max-width: 650px) {
+  .profile__addbutton{
+    margin-left: 0;
+  }
 }
