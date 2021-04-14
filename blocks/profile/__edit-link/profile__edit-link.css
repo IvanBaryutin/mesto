@@ -2,3 +2,10 @@
   width: 24px;
   margin-left: 18px;
 }
+
+@media screen and (max-width: 550px) {
+  .profile__edit-link{
+    margin-left: 10px;
+    width: 18px;
+  }
+}

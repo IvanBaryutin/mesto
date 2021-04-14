@@ -6,9 +6,8 @@
   justify-content: center;
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 390px) {
   .profile__info{
-    text-align: center;
     margin-left: 0;
   }
 }
