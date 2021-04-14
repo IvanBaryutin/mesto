@@ -1,0 +1,14 @@
+.popup__close{
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  xtransition: all 200ms;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  transform: rotate(45deg);
+}
+
+.popup__close:hover{
+  color: orange;
+}

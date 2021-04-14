@@ -28,4 +28,14 @@
 @import url('../blocks/footer/footer.css');
 @import url('../blocks/footer/__copyright/footer__copyright.css');
 
+@import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/__container/popup__container.css');
+@import url('../blocks/popup/__close/popup__close.css');
+
+@import url('../blocks/form/form.css');
+@import url('../blocks/form/__title/form__title.css');
+@import url('../blocks/form/__profile-info/form__profile-info.css');
+@import url('../blocks/form/__text-input/form__text-input.css');
+@import url('../blocks/form/__submit-button/form__submit-button.css');
+
 
