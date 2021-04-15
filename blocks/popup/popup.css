@@ -5,7 +5,6 @@
   bottom: 0;
   left: 0;
   right: 0;
-  display: block;
   transition: opacity 0.5s;
   display: none;
 }
