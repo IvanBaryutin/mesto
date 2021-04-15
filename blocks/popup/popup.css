@@ -7,4 +7,11 @@
   right: 0;
   display: block;
   transition: opacity 0.5s;
+  display: none;
+}
+
+@media screen and (max-width: 450px) {
+  .popup{
+    padding: 19px;
+  }
 }
