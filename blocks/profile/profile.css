@@ -21,3 +21,9 @@
     padding-bottom: 35px;
   }
 }
+
+@media screen and (max-width: 430px) {
+  .profile{
+    flex-direction: column;
+  }
+}

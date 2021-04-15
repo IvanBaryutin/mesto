@@ -4,16 +4,46 @@
   margin: 0;
   font-weight: 500;
   white-space: nowrap;
-  display: block;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 450px;
+}
+
+@media screen and (max-width: 850px) {
+  .profile__name{
+    max-width: 400px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .profile__name{
+    max-width: 350px;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .profile__name{
+    max-width: 300px;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .profile__name{
     font-size: 27px;
     line-height: 33px;
+    max-width: 260px;
+  }
+}
+
+@media screen and (max-width: 660px) {
+  .profile__name{
+    max-width: 220px;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .profile__name{
+    max-width: 200px;
   }
 }
 
@@ -21,6 +51,5 @@
 @media screen and (max-width: 550px) {
   .profile__name{
     margin-top: 22px;
-    margin-left: 24px;
   }
 }
