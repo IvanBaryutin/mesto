@@ -4,3 +4,11 @@
   object-fit: cover;
   display: block;
 }
+
+/*
+@media screen and (max-width: 920px) {
+  .element__image{
+    width: 252px;
+  }
+}
+*/

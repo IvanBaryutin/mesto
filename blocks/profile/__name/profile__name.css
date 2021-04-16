@@ -7,6 +7,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 450px;
+  grid-row: 1;
+  grid-column: 1;
 }
 
 @media screen and (max-width: 850px) {

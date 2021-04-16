@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function(){ // Аналог $(document).ready(function(){
 
-  let ProfileEditLink = document.querySelector('.profile__edit-link');
+  let ProfileEditLink = document.querySelector('.profile__edit-button');
   ProfileEditLink.addEventListener('click', openPopup);
   let closePopupLink = document.querySelector('.popup__close');
   closePopupLink.addEventListener('click', closePopup);
