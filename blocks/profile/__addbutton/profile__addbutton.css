@@ -1,4 +1,5 @@
 .profile__addbutton{
+  outline: 0;
   margin-left: auto;
   padding: 12px 60px;
   border: solid 2px #fff;
@@ -9,6 +10,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 22px;
+  border-radius: 2px;
+
 }
 
 @media screen and (max-width: 600px) {
@@ -23,5 +26,6 @@
     width: 100%;
     padding: 17px auto;
     margin-top: 34px;
+    background-size: 16px;
   }
 }
