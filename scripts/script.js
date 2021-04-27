@@ -45,6 +45,8 @@ const initialCards2 = [
   let formJobInput = popup.querySelector('.form__text-input_name_job');
   let form = popup.querySelector('.form');
 
+  let likeIcon = document.querySelector('.element__like-icon');
+
   function openPopup() {
     formNameInput.value = profileName.textContent;
     formJobInput.value = profileJob.textContent;
@@ -111,5 +113,14 @@ const initialCards2 = [
   form.addEventListener('submit', formSubmitHandler);
   closePopupLink.addEventListener('click', closePopup);
   profileEditLink.addEventListener('click', openPopup);
+
+  likeIcon.addEventListener('click', function (event) { // event доступен как параметр
+    console.log(event.target); // его можно использовать в теле обработчика
+    //https://stackoverflow.com/questions/21700364/adding-click-event-listener-to-elements-with-the-same-class ???!!!
+  });
+
+
   addElementsCards(initialCards);
   addElementsCards(initialCards2);
+
+
