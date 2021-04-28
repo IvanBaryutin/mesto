@@ -102,6 +102,7 @@ const initialCards2 = [
       // наполняем содержимым
       listItem.querySelector('.element__title').textContent = el['name'];
       listItem.querySelector('.element__image').src = el['link'];
+      listItem.querySelector('.element__image').alt = el['name']+ ' фото';
       listItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
         event.target.classList.toggle('element__like-icon_active');
       });
