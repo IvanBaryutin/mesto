@@ -95,14 +95,14 @@ const initialCards2 = [
     const title = formTitleInput.value;
     const link = formLinkInput.value;
     if (title && link) {
-      const NewCards = [
+      const NewCard = [
         {
           name: title,
           link: link
         }
       ]
       //console.log(NewCards);
-      addElementsCards(NewCards);
+      addElementsCards(NewCard);
     }
     closePopupAddArticle();
   }
@@ -133,11 +133,30 @@ const initialCards2 = [
       articleItem.querySelector('.element__delete-icon').addEventListener('click', function(event) {
         event.target.closest('.element').remove();
       });
+      // добавим обработчик клика по картинке
+      articleItem.querySelector('.element__image').addEventListener('click', function(event) {
+        //console.log(event.target.src);
+        //console.log(event.target.parentNode.querySelector('.element__title').textContent);
+        showImage(event.target.src, event.target.parentNode.querySelector('.element__title').textContent);
+      });
 
       return articleItem;
     });
      // добавим элементы в DOM, «разложив» массив
      elementsContainer.prepend(...cardsElements);
+  }
+
+  function showImage(url, caption) {
+    const imgUrl = popupImage.querySelector('.popup__image');
+    const imgCaption = popupImage.querySelector('.popup__figcaption');
+    console.log(url);
+    console.log(caption);
+    if (url && caption) {
+      imgUrl.src = url;
+      imgCaption.textContent = caption;
+      popupImage.classList.add('popup_opened');
+    }
+
   }
 
 
