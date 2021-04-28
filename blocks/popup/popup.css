@@ -7,6 +7,7 @@
   right: 0;
   transition: opacity 0.5s;
   display: none;
+  text-align: center;
 }
 
 @media screen and (max-width: 450px) {

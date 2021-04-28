@@ -1,9 +1,6 @@
 .popup__figure{
   max-width: 75vw;
-  border-radius: 10px;
-  margin: 0 auto;
-  top: 25%;
-  background-color: #fff;
+  top: 15vh;
   position: relative;
   display: inline-block;
 
