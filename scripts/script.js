@@ -27,8 +27,8 @@ const initialCards = [
 
 const initialCards2 = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    name: 'Городок',
+    link: 'https://images.unsplash.com/photo-1619550148107-ec8561f7cbac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
   }
 ];
 
@@ -45,7 +45,6 @@ const initialCards2 = [
   let formJobInput = popup.querySelector('.form__text-input_name_job');
   let form = popup.querySelector('.form');
 
-  let likeIcon = document.querySelector('.element__like-icon');
 
   function openPopup() {
     formNameInput.value = profileName.textContent;
@@ -103,6 +102,9 @@ const initialCards2 = [
       // наполняем содержимым
       listItem.querySelector('.element__title').textContent = el['name'];
       listItem.querySelector('.element__image').src = el['link'];
+      listItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
+        event.target.classList.toggle('element__like-icon_active');
+      });
       return listItem;
     });
     // добавим элементы в DOM, «разложив» массив
@@ -114,13 +116,23 @@ const initialCards2 = [
   closePopupLink.addEventListener('click', closePopup);
   profileEditLink.addEventListener('click', openPopup);
 
-  likeIcon.addEventListener('click', function (event) { // event доступен как параметр
-    console.log(event.target); // его можно использовать в теле обработчика
-    //https://stackoverflow.com/questions/21700364/adding-click-event-listener-to-elements-with-the-same-class ???!!!
-  });
+
 
 
   addElementsCards(initialCards);
   addElementsCards(initialCards2);
+
+  /*
+  let likeIcons = document.querySelectorAll('.element__like-icon');
+  console.log('test');
+  Array.from(likeIcons).forEach(icon => {
+    icon.addEventListener('click', function(event) {
+        event.target.classList.toggle('element__like-icon_active');
+    });
+  });
+  */
+
+
+
 
 
