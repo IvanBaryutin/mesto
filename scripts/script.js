@@ -97,16 +97,22 @@ const initialCards2 = [
     const cardsElements = userElementsData.map(el => {
 
       //клонируем
-      const listItem = elementTemplate.querySelector('.element').cloneNode(true);
+      const articleItem = elementTemplate.querySelector('.element').cloneNode(true);
 
       // наполняем содержимым
-      listItem.querySelector('.element__title').textContent = el['name'];
-      listItem.querySelector('.element__image').src = el['link'];
-      listItem.querySelector('.element__image').alt = el['name']+ ' фото';
-      listItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
+      articleItem.querySelector('.element__title').textContent = el['name'];
+      articleItem.querySelector('.element__image').src = el['link'];
+      articleItem.querySelector('.element__image').alt = el['name']+ ' фото';
+      // добавим обработчик клика по like
+      articleItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
         event.target.classList.toggle('element__like-icon_active');
       });
-      return listItem;
+      // добавим обработчик клика по delete
+      articleItem.querySelector('.element__delete-icon').addEventListener('click', function(event) {
+        event.target.closest('.element').remove();
+      });
+
+      return articleItem;
     });
     // добавим элементы в DOM, «разложив» массив
     elementsContainer.append(...cardsElements);
