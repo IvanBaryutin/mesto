@@ -26,14 +26,6 @@ const initialCards = [
   }
 ];
 
-//Тестовый массив для добавления
-const initialCardsTest = [
-  {
-    name: 'Городок',
-    link: 'https://images.unsplash.com/photo-1619550148107-ec8561f7cbac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80'
-  }
-];
-
 //Кнопки
 const profileEditLink = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__addbutton');
@@ -42,8 +34,8 @@ const closePopupLinkArticle = document.querySelector('.popup__close_content_arti
 const closePopupLinkImage = document.querySelector('.popup__close_content_image');
 
 
-let profileName = document.querySelector('.profile__name');
-let profileJob = document.querySelector('.profile__subtitle');
+const profileName = document.querySelector('.profile__name');
+const profileJob = document.querySelector('.profile__subtitle');
 
 //Модальные окна
 const popupEditProfile = document.querySelector('.popup_content_profile');
@@ -60,50 +52,40 @@ const formLinkInput = popupAddArticle.querySelector('.form__text-input_name_link
 const formEditProfile = popupEditProfile.querySelector('.form');
 const formAddArticle = popupAddArticle.querySelector('.form');
 
-function openPopupEditProfile() {
-  formNameInput.value = profileName.textContent;
-  formJobInput.value = profileJob.textContent;
-  popupEditProfile.classList.add('popup_opened');
+
+function openPopup(popup) {
+  if (popup === popupEditProfile) {
+    formNameInput.value = profileName.textContent;
+    formJobInput.value = profileJob.textContent;
+  }
+  popup.classList.add('popup_opened');
+  console.log('opened');
 }
 
-function openPopupAddArticle() {
-  popupAddArticle.classList.add('popup_opened');
-}
-
-
-function closePopupEditProfile() {
-  popupEditProfile.classList.remove('popup_opened');
-}
-
-function closePopupAddArticle() {
-  popupAddArticle.classList.remove('popup_opened');
-}
-
-function closePopupImage() {
-  popupImage.classList.remove('popup_opened');
+function closePopup(popup) {
+  popup.classList.remove('popup_opened');
+  console.log('closed');
 }
 
 function editProfileSubmitHandler (evt) {
   evt.preventDefault();
   profileName.textContent = formNameInput.value;
   profileJob.textContent = formJobInput.value;
-  closePopupEditProfile();
+  closePopup(popupEditProfile)
 }
 
 function addArticleSubmitHandler (evt) {
   evt.preventDefault();
   const title = formTitleInput.value;
   const link = formLinkInput.value;
-  if (title && link) {
-    const NewCard = [
+  const newCard = [
       {
         name: title,
         link: link
       }
     ]
-    addElementsCards(NewCard);
-  }
-  closePopupAddArticle();
+  addElementsCards(newCard);
+  closePopup(popupAddArticle);
 }
 
 
@@ -119,11 +101,12 @@ function addElementsCards(userElementsData) {
 
     //клонируем
     const articleItem = elementTemplate.querySelector('.element').cloneNode(true);
+    const articleImage = articleItem.querySelector('.element__image');
 
     // наполняем содержимым
     articleItem.querySelector('.element__title').textContent = el['name'];
-    articleItem.querySelector('.element__image').src = el['link'];
-    articleItem.querySelector('.element__image').alt = el['name']+ ' фото';
+    articleImage.src = el['link'];
+    articleImage.alt = el['name']+ ' фото';
     // добавим обработчик клика по like
     articleItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
       event.target.classList.toggle('element__like-icon_active');
@@ -134,8 +117,6 @@ function addElementsCards(userElementsData) {
     });
     // добавим обработчик клика по картинке
     articleItem.querySelector('.element__image').addEventListener('click', function(event) {
-      //console.log(event.target.src);
-      //console.log(event.target.parentNode.querySelector('.element__title').textContent);
       showImage(event.target.src, event.target.parentNode.querySelector('.element__title').textContent);
     });
 
@@ -143,6 +124,7 @@ function addElementsCards(userElementsData) {
   });
   // добавим элементы в DOM, «разложив» массив
   elementsContainer.prepend(...cardsElements);
+  formAddArticle.reset();
 }
 
 function showImage(url, caption) {
@@ -150,19 +132,23 @@ function showImage(url, caption) {
   const imgCaption = popupImage.querySelector('.popup__figcaption');
   if (url && caption) {
     imgUrl.src = url;
+    imgUrl.alt = caption + ' фото';
     imgCaption.textContent = caption;
-    popupImage.classList.add('popup_opened');
+    openPopup(popupImage);
   }
 }
 
 formEditProfile.addEventListener('submit', editProfileSubmitHandler);
 formAddArticle.addEventListener('submit', addArticleSubmitHandler);
 
-closePopupLinkProfile.addEventListener('click', closePopupEditProfile);
-closePopupLinkArticle .addEventListener('click', closePopupAddArticle);
-closePopupLinkImage.addEventListener('click', closePopupImage);
+closePopupLinkProfile.addEventListener('click' , () => closePopup(popupEditProfile));
+closePopupLinkArticle.addEventListener('click' , () => closePopup(popupAddArticle));
+closePopupLinkImage.addEventListener('click' , () => closePopup(popupImage));
 
-profileEditLink.addEventListener('click', openPopupEditProfile);
-addButton.addEventListener('click', openPopupAddArticle);
+profileEditLink.addEventListener('click' , () => openPopup(popupEditProfile));
+//addButton.addEventListener('click', openPopup(popupAddArticle));
+addButton.addEventListener('click' , () => openPopup(popupAddArticle));
 
 addElementsCards(initialCards);
+
+
