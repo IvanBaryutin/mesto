@@ -37,6 +37,8 @@ const closePopupLinkImage = document.querySelector('.popup__close_content_image'
 const profileName = document.querySelector('.profile__name');
 const profileJob = document.querySelector('.profile__subtitle');
 
+const elementsContainer = document.querySelector('.elements');
+
 //Модальные окна
 const popupEditProfile = document.querySelector('.popup_content_profile');
 const popupAddArticle = document.querySelector('.popup_content_article');
@@ -59,12 +61,10 @@ function openPopup(popup) {
     formJobInput.value = profileJob.textContent;
   }
   popup.classList.add('popup_opened');
-  console.log('opened');
 }
 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  console.log('closed');
 }
 
 function editProfileSubmitHandler (evt) {
@@ -91,12 +91,12 @@ function addArticleSubmitHandler (evt) {
 
 
 
-
+/*
 function addElementsCards(userElementsData) {
   const elementTemplate = document.querySelector('#element').content;
   const elementsContainer = document.querySelector('.elements');
 
-  // создадим из массива дел массив элементов
+  // создадим из массива данных массив элементов
   const cardsElements = userElementsData.map(el => {
 
     //клонируем
@@ -126,6 +126,50 @@ function addElementsCards(userElementsData) {
   elementsContainer.prepend(...cardsElements);
   formAddArticle.reset();
 }
+*/
+
+function getCardElement(name, link) {
+  const elementTemplate = document.querySelector('#element').content;
+
+  //клонируем
+  const articleItem = elementTemplate.querySelector('.element').cloneNode(true);
+  const articleImage = articleItem.querySelector('.element__image');
+
+  // наполняем содержимым
+  articleItem.querySelector('.element__title').textContent = name;
+  //console.log(link);
+  articleImage.src = link;
+  articleImage.alt = name + ' фото';
+  // добавим обработчик клика по like
+  articleItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
+    event.target.classList.toggle('element__like-icon_active');
+  });
+  // добавим обработчик клика по delete
+  articleItem.querySelector('.element__delete-icon').addEventListener('click', function(event) {
+    event.target.closest('.element').remove();
+  });
+  // добавим обработчик клика по картинке
+  articleItem.querySelector('.element__image').addEventListener('click', function(event) {
+    showImage(event.target.src, event.target.parentNode.querySelector('.element__title').textContent);
+  });
+  return articleItem;
+}
+
+
+
+renderCard = function(data, wrap) {
+  wrap.prepend(...data);
+  formAddArticle.reset();
+};
+
+
+function addElementsCards(userElementsData) {
+  const cardsElements = userElementsData.map(el => {
+    return(getCardElement(el['name'], el['link']));
+  });
+  renderCard(cardsElements , elementsContainer);
+}
+
 
 function showImage(url, caption) {
   const imgUrl = popupImage.querySelector('.popup__image');
@@ -146,7 +190,6 @@ closePopupLinkArticle.addEventListener('click' , () => closePopup(popupAddArticl
 closePopupLinkImage.addEventListener('click' , () => closePopup(popupImage));
 
 profileEditLink.addEventListener('click' , () => openPopup(popupEditProfile));
-//addButton.addEventListener('click', openPopup(popupAddArticle));
 addButton.addEventListener('click' , () => openPopup(popupAddArticle));
 
 addElementsCards(initialCards);
