@@ -96,7 +96,6 @@ function getCardElement(name, link) {
 
   // наполняем содержимым
   articleItem.querySelector('.element__title').textContent = name;
-  //console.log(link);
   articleImage.src = link;
   articleImage.alt = name + ' фото';
   // добавим обработчик клика по like
@@ -109,7 +108,7 @@ function getCardElement(name, link) {
   });
   // добавим обработчик клика по картинке
   articleItem.querySelector('.element__image').addEventListener('click', function(event) {
-    showImage(event.target.src, event.target.parentNode.querySelector('.element__title').textContent);
+    showImage(link, name);
   });
   return articleItem;
 }
