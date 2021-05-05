@@ -78,55 +78,14 @@ function addArticleSubmitHandler (evt) {
   evt.preventDefault();
   const title = formTitleInput.value;
   const link = formLinkInput.value;
-  const newCard = [
-      {
-        name: title,
-        link: link
-      }
-    ]
+  const newCard = {
+    name: title,
+    link: link
+    }
   addElementsCards(newCard);
   closePopup(popupAddArticle);
 }
 
-
-
-
-/*
-function addElementsCards(userElementsData) {
-  const elementTemplate = document.querySelector('#element').content;
-  const elementsContainer = document.querySelector('.elements');
-
-  // создадим из массива данных массив элементов
-  const cardsElements = userElementsData.map(el => {
-
-    //клонируем
-    const articleItem = elementTemplate.querySelector('.element').cloneNode(true);
-    const articleImage = articleItem.querySelector('.element__image');
-
-    // наполняем содержимым
-    articleItem.querySelector('.element__title').textContent = el['name'];
-    articleImage.src = el['link'];
-    articleImage.alt = el['name']+ ' фото';
-    // добавим обработчик клика по like
-    articleItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
-      event.target.classList.toggle('element__like-icon_active');
-    });
-    // добавим обработчик клика по delete
-    articleItem.querySelector('.element__delete-icon').addEventListener('click', function(event) {
-      event.target.closest('.element').remove();
-    });
-    // добавим обработчик клика по картинке
-    articleItem.querySelector('.element__image').addEventListener('click', function(event) {
-      showImage(event.target.src, event.target.parentNode.querySelector('.element__title').textContent);
-    });
-
-    return articleItem;
-  });
-  // добавим элементы в DOM, «разложив» массив
-  elementsContainer.prepend(...cardsElements);
-  formAddArticle.reset();
-}
-*/
 
 function getCardElement(name, link) {
   const elementTemplate = document.querySelector('#element').content;
@@ -164,7 +123,15 @@ renderCard = function(data, wrap) {
 
 
 function addElementsCards(userElementsData) {
-  const cardsElements = userElementsData.map(el => {
+  let data = [];
+  if (Array.isArray(userElementsData) === false) {
+    console.log(userElementsData);
+    data.push(userElementsData)
+  } else {
+    data = userElementsData;
+  }
+
+  const cardsElements = data.map(el => {
     return(getCardElement(el['name'], el['link']));
   });
   renderCard(cardsElements , elementsContainer);
