@@ -125,7 +125,6 @@ renderCard = function(data, wrap) {
 function addElementsCards(userElementsData) {
   let data = [];
   if (Array.isArray(userElementsData) === false) {
-    console.log(userElementsData);
     data.push(userElementsData)
   } else {
     data = userElementsData;
