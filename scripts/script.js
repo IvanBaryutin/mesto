@@ -82,7 +82,7 @@ function addArticleSubmitHandler (evt) {
     name: title,
     link: link
     }
-  addElementsCards(newCard);
+  renderCard(newCard, elementsContainer)
   closePopup(popupAddArticle);
 }
 
@@ -116,24 +116,9 @@ function getCardElement(name, link) {
 
 
 renderCard = function(data, wrap) {
-  wrap.prepend(...data);
+  wrap.prepend(getCardElement(data.name, data.link));
   formAddArticle.reset();
 };
-
-
-function addElementsCards(userElementsData) {
-  let data = [];
-  if (Array.isArray(userElementsData) === false) {
-    data.push(userElementsData)
-  } else {
-    data = userElementsData;
-  }
-
-  const cardsElements = data.map(el => {
-    return(getCardElement(el['name'], el['link']));
-  });
-  renderCard(cardsElements , elementsContainer);
-}
 
 
 function showImage(url, caption) {
@@ -157,6 +142,8 @@ closePopupLinkImage.addEventListener('click' , () => closePopup(popupImage));
 profileEditLink.addEventListener('click' , () => openPopup(popupEditProfile));
 addButton.addEventListener('click' , () => openPopup(popupAddArticle));
 
-addElementsCards(initialCards);
+initialCards.reverse().forEach((data) => {
+  renderCard(data, elementsContainer)
+});
 
 
