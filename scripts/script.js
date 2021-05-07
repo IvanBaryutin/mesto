@@ -82,8 +82,9 @@ function addArticleSubmitHandler (evt) {
     name: title,
     link: link
     }
-  renderCard(newCard, elementsContainer)
+  renderCard(newCard, elementsContainer);
   closePopup(popupAddArticle);
+  formAddArticle.reset();
 }
 
 
@@ -117,7 +118,6 @@ function getCardElement(name, link) {
 
 renderCard = function(data, wrap) {
   wrap.prepend(getCardElement(data.name, data.link));
-  formAddArticle.reset();
 };
 
 
