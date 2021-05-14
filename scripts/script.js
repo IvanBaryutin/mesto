@@ -69,9 +69,11 @@ function closePopup(popup) {
 
 function editProfileSubmitHandler (evt) {
   evt.preventDefault();
+  /*
   profileName.textContent = formNameInput.value;
   profileJob.textContent = formJobInput.value;
-  closePopup(popupEditProfile)
+  closePopup(popupEditProfile);
+  */
 }
 
 function addArticleSubmitHandler (evt) {
@@ -146,4 +148,66 @@ initialCards.reverse().forEach((data) => {
   renderCard(data, elementsContainer)
 });
 
+//Form validation
+
+// Выбираем элемент ошибки на основе уникального класса
+
+// Функция, которая добавляет класс с ошибкой
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__text-input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+
+};
+
+// Функция, которая удаляет класс с ошибкой
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__text-input_type_error');
+  errorElement.textContent = '';
+  errorElement.classList.remove('form__input-error_active');
+};
+
+// Функция, которая проверяет валидность поля
+const isValid = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    // Если поле не проходит валидацию, покажем ошибку
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    // Если проходит, скроем
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  // Находим все поля внутри формы,
+  // сделаем из них массив методом Array.from
+  const inputList = Array.from(formElement.querySelectorAll('.form__text-input'));
+  console.log(inputList);
+
+  // Обойдём все элементы полученной коллекции
+  inputList.forEach((inputElement) => {
+    // каждому полю добавим обработчик события input
+    inputElement.addEventListener('input', () => {
+      // Внутри колбэка вызовем isValid,
+      // передав ей форму и проверяемый элемент
+      isValid(formElement, inputElement)
+    });
+  });
+};
+
+
+setEventListeners(formEditProfile);
+setEventListeners(formAddArticle);
+/*
+enableValidation({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+});
+*/
 
