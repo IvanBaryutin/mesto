@@ -69,11 +69,9 @@ function closePopup(popup) {
 
 function editProfileSubmitHandler (evt) {
   evt.preventDefault();
-  /*
   profileName.textContent = formNameInput.value;
   profileJob.textContent = formJobInput.value;
   closePopup(popupEditProfile);
-  */
 }
 
 function addArticleSubmitHandler (evt) {
@@ -201,9 +199,11 @@ const toggleButtonState = (inputList, buttonElement) => {
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
     buttonElement.classList.add('form__submit-button_inactive');
+    buttonElement.disabled = true;
   } else {
     // иначе сделай кнопку активной
     buttonElement.classList.remove('form__submit-button_inactive');
+    buttonElement.disabled = false;
   }
 };
 
@@ -242,6 +242,7 @@ const enableValidation = () => {
       // У каждой формы отменим стандартное поведение
       evt.preventDefault();
     });
+    //formElement.removeEventListener('mousedown', function()); // нужно переделать соответствующую функцию и потом указать ее вторым аргументом. В начале лекции
 
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
@@ -249,14 +250,37 @@ const enableValidation = () => {
   });
 };
 
+const checkPressedMouseButton = (evt) => {
+  switch (evt.button) {
+    case 0:
+      return 'left';
+      break;
+    case 1:
+      return 'middle'
+      break;
+    case 2:
+      return 'right';
+      break;
+    }
+};
+
 const enableOverlayClose = () => {
   const popupList = Array.from(document.querySelectorAll('.popup'));
-  console.log(popupList);
-
-  // Переберём полученную коллекцию
   popupList.forEach((popupElement) => {
-    console.log(popupElement);
-    popupElement.addEventListener('mousedown' , () => closePopup(popupElement));
+    popupElement.addEventListener('mousedown' , (evt) => {
+      if (checkPressedMouseButton(evt) === 'left') {
+        //closePopup(popupElement);
+      }
+    });
+    /*
+    document.addEventListener('keydown' , (evt) => {
+      console.log(evt.key);
+      if (evt.key === 'Escape') {
+        //closePopup(popupElement);
+        console.log('Escape');
+      }
+    });
+    */
   });
 };
 
