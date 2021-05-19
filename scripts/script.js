@@ -101,21 +101,23 @@ function getCardElement(name, link) {
   articleItem.querySelector('.element__title').textContent = name;
   articleImage.src = link;
   articleImage.alt = name + ' фото';
+
   // добавим обработчик клика по like
   articleItem.querySelector('.element__like-icon').addEventListener('click', function(event) {
     event.target.classList.toggle('element__like-icon_active');
   });
+
   // добавим обработчик клика по delete
   articleItem.querySelector('.element__delete-icon').addEventListener('click', function(event) {
     event.target.closest('.element').remove();
   });
+
   // добавим обработчик клика по картинке
   articleItem.querySelector('.element__image').addEventListener('click', function(event) {
     showImage(link, name);
   });
   return articleItem;
 }
-
 
 
 renderCard = function(data, wrap) {
@@ -151,7 +153,7 @@ initialCards.reverse().forEach((data) => {
   renderCard(data, elementsContainer)
 });
 
-
+//Проверяем какая кнопка мыши нажата
 const checkPressedMouseButton = (evt) => {
   switch (evt.button) {
     case 0:
@@ -166,19 +168,19 @@ const checkPressedMouseButton = (evt) => {
     }
 };
 
-function  checkPressedPopupButton(evt) {
+//Проверяем какая кнопка клавиатуры нажата
+function checkPressedPopupButton(evt) {
     if (evt.key === 'Escape') {
       closePopup(openedPopup);
     }
-
 };
 
+//Закрываем попап по нажатию на попап
 const enableOverlayClose = () => {
   const popupList = Array.from(document.querySelectorAll('.popup'));
   popupList.forEach((popupElement) => {
     popupElement.addEventListener('mousedown' , (evt) => {
-      if ((checkPressedMouseButton(evt) === 'left') && ((evt.target.classList.contains('popup__image')) || (evt.target.classList.contains('popup')))) {
-        //console.log(popupElement);
+      if ((checkPressedMouseButton(evt) === 'left') && (evt.target.classList.contains('popup'))) {
         closePopup(popupElement);
       }
     });
@@ -186,7 +188,5 @@ const enableOverlayClose = () => {
 };
 
 
-// Вызовем функцию
-enableValidation();
 enableOverlayClose();
 
