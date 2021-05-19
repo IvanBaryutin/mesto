@@ -63,6 +63,7 @@ function openPopup(popup) {
   }
   popup.classList.add('popup_opened');
   openedPopup = popup;
+  document.addEventListener('keydown', checkPressedPopupButton);
 }
 
 function closePopup(popup) {
@@ -146,7 +147,7 @@ closePopupLinkImage.addEventListener('click' , () => closePopup(popupImage));
 profileEditLink.addEventListener('click' , () => openPopup(popupEditProfile));
 addButton.addEventListener('click' , () => openPopup(popupAddArticle));
 
-document.addEventListener('keydown', checkPressedPopupButton);
+
 
 
 initialCards.reverse().forEach((data) => {
@@ -172,6 +173,7 @@ const checkPressedMouseButton = (evt) => {
 function checkPressedPopupButton(evt) {
     if (evt.key === 'Escape') {
       closePopup(openedPopup);
+      document.removeEventListener('keydown', checkPressedPopupButton);
     }
 };
 

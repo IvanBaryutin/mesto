@@ -83,6 +83,7 @@ const enableValidation = (settings) => {
 
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
+
     formElement.addEventListener('submit', (evt) => {
       // У каждой формы отменим стандартное поведение
       evt.preventDefault();
@@ -96,7 +97,7 @@ const enableValidation = (settings) => {
 
 // включение валидации вызовом enableValidation, все настройки передаются при вызове
 enableValidation({
-  formSelector: '.form', //
+  formSelector: '.form',
   inputSelector: '.form__text-input',
   submitButtonSelector: '.form__submit-button',
   inactiveButtonClass: 'form__submit-button_inactive',
