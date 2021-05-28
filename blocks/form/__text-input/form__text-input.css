@@ -14,14 +14,5 @@
 
 .form__text-input:focus {
   outline: none;
-  /*box-shadow: 0 0 2px 5px rgba(0, 123, 255, .6);
-  border-radius: 2px;*/
- }
-
- /*
-.form__text-input:invalid {
-  border-bottom: 1px solid rgba(255, 0, 0, 1);
-  margin-bottom: 5px;
- }
- */
+}
 
