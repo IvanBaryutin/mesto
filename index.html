@@ -45,14 +45,16 @@
       <form class="form" name="edit-form" novalidate>
         <h2 class="form__title">Редактировать профиль</h2>
         <fieldset class="form__profile-info">
-          <input type="text" name="name" id="name-input" class="form__text-input form__text-input_name_name" value="Жак-Ив Кусто" placeholder="Имя" minlength="2" maxlength="40" required>
+          <input type="text" name="name" id="name-input" class="form__text-input form__text-input_name_name"
+            value="Жак-Ив Кусто" placeholder="Имя" minlength="2" maxlength="40" required>
           <span class="form__input-error name-input-error"></span>
-          <input type="text" name="job" id="name-job" class="form__text-input form__text-input_name_job" value="Исследователь океана" placeholder="Профессия" minlength="2" maxlength="200" required>
+          <input type="text" name="job" id="name-job" class="form__text-input form__text-input_name_job"
+            value="Исследователь океана" placeholder="Профессия" minlength="2" maxlength="200" required>
           <span class="form__input-error name-job-error"></span>
         </fieldset>
         <button type="submit" value="Сохранить" class="form__submit-button">Сохранить</button>
-    </form>
-    <button type="button" class="popup__close popup__close_content_profile" aria-label="Закрыть"></button>
+      </form>
+      <button type="button" class="popup__close popup__close_content_profile" aria-label="Закрыть"></button>
     </div>
   </div>
 
@@ -61,20 +63,23 @@
       <form class="form" name="add-form" novalidate>
         <h2 class="form__title">Новое место</h2>
         <fieldset class="form__profile-info">
-          <input type="text" name="title" id="title-input" class="form__text-input form__text-input_name_title" value="" placeholder="Название" minlength="2" maxlength="30" required>
+          <input type="text" name="title" id="title-input" class="form__text-input form__text-input_name_title" value=""
+            placeholder="Название" minlength="2" maxlength="30" required>
           <span class="form__input-error title-input-error"></span>
-          <input type="url" name="link" id="link-input" class="form__text-input form__text-input_name_link" value="" placeholder="Ссылка на картинку" required>
+          <input type="url" name="link" id="link-input" class="form__text-input form__text-input_name_link" value=""
+            placeholder="Ссылка на картинку" required>
           <span class="form__input-error link-input-error"></span>
         </fieldset>
         <button type="submit" value="Сохранить" class="form__submit-button">Создать</button>
-    </form>
-    <button type="button" class="popup__close popup__close_content_article" aria-label="Закрыть"></button>
+      </form>
+      <button type="button" class="popup__close popup__close_content_article" aria-label="Закрыть"></button>
     </div>
   </div>
 
   <div class="popup popup_content_image">
     <div class="popup__figure">
-      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз Фотография">
+      <img class="popup__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+        alt="Архыз Фотография">
       <div class="popup__figcaption"></div>
       <button type="button" class="popup__close popup__close_content_image" aria-label="Закрыть"></button>
     </div>
@@ -82,7 +87,8 @@
 
   <template id="element">
     <article class="element">
-      <img class="element__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" alt="Архыз Фотография">
+      <img class="element__image" src="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg"
+        alt="Архыз Фотография">
       <button type="button" class="element__delete-icon" aria-label="Удалить"></button>
       <div class="element__description">
         <h2 class="element__title"></h2>
@@ -91,9 +97,10 @@
     </article>
   </template>
 
-  <script src="scripts/validate.js"></script>
 
-  <script src="scripts/script.js"></script>
+  <script type="module" src="scripts/FormValidator.js"></script>
+  <script type="module" src="scripts/index.js"></script>
+  <script type="module" src="scripts/Card.js"></script>
 
 </body>
 

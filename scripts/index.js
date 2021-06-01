@@ -1,3 +1,6 @@
+import { Card } from './Card.js';
+import { FormValidator } from './FormValidator.js';
+
 //Массив данных для карточек elements
 const initialCards = [
   {
@@ -71,34 +74,34 @@ function closePopup(popup) {
   document.removeEventListener('keydown', checkPressedPopupButton);
 }
 
-function editProfileSubmitHandler (evt) {
+function editProfileSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = formNameInput.value;
   profileJob.textContent = formJobInput.value;
   closePopup(popupEditProfile);
 }
 
-function addArticleSubmitHandler (evt) {
+function addArticleSubmitHandler(evt) {
   evt.preventDefault();
   const title = formTitleInput.value;
   const link = formLinkInput.value;
   const newCard = {
     name: title,
     link: link
-    }
+  }
   renderCard(newCard, elementsContainer);
   closePopup(popupAddArticle);
   formAddArticle.reset();
 }
 
-const renderCard = function(data) {
+const renderCard = function (data) {
   const card = new Card(data, '.element');
-	const cardElement = card.getCardElement();
-	elementsContainer.prepend(cardElement);
+  const cardElement = card.getCardElement();
+  elementsContainer.prepend(cardElement);
 };
 
 
-function showImage(url, caption) {
+export default function showImage(url, caption) {
   if (url && caption) {
     imgUrl.src = url;
     imgUrl.alt = caption + ' фото';
@@ -110,32 +113,29 @@ function showImage(url, caption) {
 formEditProfile.addEventListener('submit', editProfileSubmitHandler);
 formAddArticle.addEventListener('submit', addArticleSubmitHandler);
 
-closePopupLinkProfile.addEventListener('click' , () => closePopup(popupEditProfile));
-closePopupLinkArticle.addEventListener('click' , () => closePopup(popupAddArticle));
-closePopupLinkImage.addEventListener('click' , () => closePopup(popupImage));
+closePopupLinkProfile.addEventListener('click', () => closePopup(popupEditProfile));
+closePopupLinkArticle.addEventListener('click', () => closePopup(popupAddArticle));
+closePopupLinkImage.addEventListener('click', () => closePopup(popupImage));
 
-profileEditLink.addEventListener('click' , () => {
+profileEditLink.addEventListener('click', () => {
   formNameInput.value = profileName.textContent;
   formJobInput.value = profileJob.textContent;
   openPopup(popupEditProfile);
 });
-addButton.addEventListener('click' , () => openPopup(popupAddArticle));
-
-
-
+addButton.addEventListener('click', () => openPopup(popupAddArticle));
 
 //Проверяем какая кнопка клавиатуры нажата
 function checkPressedPopupButton(evt) {
-    if (evt.key === 'Escape') {
-      closePopup(openedPopup);
-    }
+  if (evt.key === 'Escape') {
+    closePopup(openedPopup);
+  }
 };
 
 //Закрываем попап по нажатию на попап
 const enableOverlayClose = () => {
   const popupList = Array.from(document.querySelectorAll('.popup'));
   popupList.forEach((popupElement) => {
-    popupElement.addEventListener('click' , (evt) => {
+    popupElement.addEventListener('click', (evt) => {
       if (evt.target.classList.contains('popup')) {
         closePopup(popupElement);
       }
@@ -145,56 +145,27 @@ const enableOverlayClose = () => {
 
 enableOverlayClose();
 
+const enableValidation = (settings) => {
+  // Найдём все формы с указанным классом в DOM
+  const formList = Array.from(document.querySelectorAll(settings.formSelector));
 
-class Card {
-	constructor(data, cardSelector) {
-		this._name = data.name;
-		this._link = data.link;
-		this._cardSelector = cardSelector;
-	}
+  // Переберём полученную коллекцию
+  formList.forEach((formElement) => {
+    const form = new FormValidator(settings, formElement);
+    form._enableValidation();
+  });
+};
 
-	_getTemplate = () => {
-    const elementTemplate = document.querySelector('#element').content;
-    //клонируем
-    const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
-    return cardElement;
-	}
-  getCardElement = () => {
-    this._element = this._getTemplate();
-    const articleImage = this._element.querySelector('.element__image');
-    this._element.querySelector('.element__title').textContent = this._name;
-    articleImage.src = this._link;
-    articleImage.alt = this._name + ' фото';
-
-    this._setEventListeners(this._link, this._name);
-
-    return this._element;
-  }
-
-  _setEventListeners = (link, caption) => {
-
-    // добавим обработчик клика по like
-    this._element.querySelector('.element__like-icon').addEventListener('click', function(event) {
-      event.target.classList.toggle('element__like-icon_active');
-    });
-
-    // добавим обработчик клика по delete
-    this._element.querySelector('.element__delete-icon').addEventListener('click', function(event) {
-      event.target.closest('.element').remove();
-    });
-
-    // добавим обработчик клика по картинке
-    this._element.querySelector('.element__image').addEventListener('click', function(event) {
-      showImage(link, caption);
-    });
-
-  }
-
-}
+// включение валидации вызовом enableValidation, все настройки передаются при вызове
+enableValidation({
+  formSelector: '.form',
+  inputSelector: '.form__text-input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_inactive',
+  inputErrorClass: 'form__text-input_type_error',
+  errorClass: 'form__input-error_active'
+});
 
 initialCards.reverse().forEach((data) => {
   renderCard(data);
 });
-
-
-
