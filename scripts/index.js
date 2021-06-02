@@ -92,10 +92,11 @@ function addArticleSubmitHandler(evt) {
   renderCard(newCard, elementsContainer);
   closePopup(popupAddArticle);
   formAddArticle.reset();
+  form2.toggleButtonState();
 }
 
 const renderCard = function (data) {
-  const card = new Card(data, '.element');
+  const card = new Card(data, '#element');
   const cardElement = card.getCardElement();
   elementsContainer.prepend(cardElement);
 };
@@ -145,6 +146,23 @@ const enableOverlayClose = () => {
 
 enableOverlayClose();
 
+const settings = {
+  formSelector: '.form',
+  inputSelector: '.form__text-input',
+  submitButtonSelector: '.form__submit-button',
+  inactiveButtonClass: 'form__submit-button_inactive',
+  inputErrorClass: 'form__text-input_type_error',
+  errorClass: 'form__input-error_active'
+}
+
+const form1 = new FormValidator(settings, formEditProfile);
+form1.enableValidation();
+const form2 = new FormValidator(settings, formAddArticle);
+form2.enableValidation();
+
+
+
+/*
 const enableValidation = (settings) => {
   // Найдём все формы с указанным классом в DOM
   const formList = Array.from(document.querySelectorAll(settings.formSelector));
@@ -152,7 +170,7 @@ const enableValidation = (settings) => {
   // Переберём полученную коллекцию
   formList.forEach((formElement) => {
     const form = new FormValidator(settings, formElement);
-    form._enableValidation();
+    form.enableValidation();
   });
 };
 
@@ -165,6 +183,7 @@ enableValidation({
   inputErrorClass: 'form__text-input_type_error',
   errorClass: 'form__input-error_active'
 });
+*/
 
 initialCards.reverse().forEach((data) => {
   renderCard(data);

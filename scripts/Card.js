@@ -6,26 +6,36 @@ export class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
   }
+  _handleClickImage = () => {
+    showImage(this._link, this._name);
+  };
+
+  _handleClickRemove = () => {
+    this._element.remove();
+    this._element = null;
+  };
 
   _getTemplate = () => {
-    const elementTemplate = document.querySelector('#element').content;
+    const elementTemplate = document.querySelector(this._cardSelector).content;
     //клонируем
     const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
     return cardElement;
   }
   getCardElement = () => {
     this._element = this._getTemplate();
-    const articleImage = this._element.querySelector('.element__image');
+    //const articleImage = this._element.querySelector('.element__image');
+    this._image = this._element.querySelector('.element__image');
     this._element.querySelector('.element__title').textContent = this._name;
-    articleImage.src = this._link;
-    articleImage.alt = this._name + ' фото';
-
-    this._setEventListeners(this._link, this._name);
+    //articleImage.src = this._link;
+    //articleImage.alt = this._name + ' фото';
+    this._image.src = this._link;
+    this._image.alt = this._name + ' фото';
+    this._setEventListeners();
 
     return this._element;
   }
 
-  _setEventListeners = (link, caption) => {
+  _setEventListeners = () => {
 
     // добавим обработчик клика по like
     this._element.querySelector('.element__like-icon').addEventListener('click', function (event) {
@@ -33,14 +43,25 @@ export class Card {
     });
 
     // добавим обработчик клика по delete
+    this._element.querySelector('.element__delete-icon').addEventListener('click', () => {
+      this._handleClickRemove();
+    });
+    /*
     this._element.querySelector('.element__delete-icon').addEventListener('click', function (event) {
       event.target.closest('.element').remove();
     });
+    */
 
     // добавим обработчик клика по картинке
+    this._element.querySelector('.element__image').addEventListener('click', () => {
+      this._handleClickImage();
+    });
+    /*
     this._element.querySelector('.element__image').addEventListener('click', function (event) {
+      console.log(this._link);
       showImage(link, caption);
     });
+    */
 
   }
 
