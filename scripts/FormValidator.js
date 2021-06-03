@@ -2,6 +2,7 @@ export class FormValidator {
   constructor(settings, form) {
     this._settings = settings;
     this._form = form;
+    // Находим все поля внутри формы, сделаем из них массив методом Array.from
     this._inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
     this._buttonElement = this._form.querySelector(this._settings.submitButtonSelector);
   }
@@ -16,9 +17,6 @@ export class FormValidator {
       evt.preventDefault();
     });
 
-    // Находим все поля внутри формы, сделаем из них массив методом Array.from
-    //const inputList = Array.from(this._form.querySelectorAll(this._settings.inputSelector));
-    //const buttonElement = this._form.querySelector(this._settings.submitButtonSelector);
     //Вызовем toggleButtonState, чтобы не ждать ввода данных в поля
     this.toggleButtonState();
 
@@ -33,7 +31,6 @@ export class FormValidator {
         this.toggleButtonState();
       });
     });
-
   }
 
   toggleButtonState = () => {
@@ -60,16 +57,15 @@ export class FormValidator {
     }
   }
 
-
   // Функция принимает массив полей
-  _hasInvalidInput = (inputList) => {
+  _hasInvalidInput = () => {
     // проходим по массиву полей методом some
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       // Если поле не валидно, колбэк вернёт true, обход массива прекратится и вся функция hasInvalidInput вернёт true
       return !inputElement.validity.valid;
+
     })
   };
-
 
   // Функция, которая добавляет класс с ошибкой
   _showInputError = (inputElement, errorMessage) => {

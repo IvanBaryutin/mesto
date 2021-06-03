@@ -92,7 +92,7 @@ function addArticleSubmitHandler(evt) {
   renderCard(newCard, elementsContainer);
   closePopup(popupAddArticle);
   formAddArticle.reset();
-  form2.toggleButtonState();
+  formAddArticleValidator.toggleButtonState();
 }
 
 const renderCard = function (data) {
@@ -155,35 +155,10 @@ const settings = {
   errorClass: 'form__input-error_active'
 }
 
-const form1 = new FormValidator(settings, formEditProfile);
-form1.enableValidation();
-const form2 = new FormValidator(settings, formAddArticle);
-form2.enableValidation();
-
-
-
-/*
-const enableValidation = (settings) => {
-  // Найдём все формы с указанным классом в DOM
-  const formList = Array.from(document.querySelectorAll(settings.formSelector));
-
-  // Переберём полученную коллекцию
-  formList.forEach((formElement) => {
-    const form = new FormValidator(settings, formElement);
-    form.enableValidation();
-  });
-};
-
-// включение валидации вызовом enableValidation, все настройки передаются при вызове
-enableValidation({
-  formSelector: '.form',
-  inputSelector: '.form__text-input',
-  submitButtonSelector: '.form__submit-button',
-  inactiveButtonClass: 'form__submit-button_inactive',
-  inputErrorClass: 'form__text-input_type_error',
-  errorClass: 'form__input-error_active'
-});
-*/
+const formEditProfileValidator = new FormValidator(settings, formEditProfile);
+formEditProfileValidator.enableValidation();
+const formAddArticleValidator= new FormValidator(settings, formAddArticle);
+formAddArticleValidator.enableValidation();
 
 initialCards.reverse().forEach((data) => {
   renderCard(data);

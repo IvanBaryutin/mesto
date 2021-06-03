@@ -6,6 +6,7 @@ export class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
   }
+
   _handleClickImage = () => {
     showImage(this._link, this._name);
   };
@@ -21,13 +22,12 @@ export class Card {
     const cardElement = elementTemplate.querySelector('.element').cloneNode(true);
     return cardElement;
   }
+
   getCardElement = () => {
     this._element = this._getTemplate();
     //const articleImage = this._element.querySelector('.element__image');
     this._image = this._element.querySelector('.element__image');
     this._element.querySelector('.element__title').textContent = this._name;
-    //articleImage.src = this._link;
-    //articleImage.alt = this._name + ' фото';
     this._image.src = this._link;
     this._image.alt = this._name + ' фото';
     this._setEventListeners();
@@ -46,22 +46,11 @@ export class Card {
     this._element.querySelector('.element__delete-icon').addEventListener('click', () => {
       this._handleClickRemove();
     });
-    /*
-    this._element.querySelector('.element__delete-icon').addEventListener('click', function (event) {
-      event.target.closest('.element').remove();
-    });
-    */
 
     // добавим обработчик клика по картинке
     this._element.querySelector('.element__image').addEventListener('click', () => {
       this._handleClickImage();
     });
-    /*
-    this._element.querySelector('.element__image').addEventListener('click', function (event) {
-      console.log(this._link);
-      showImage(link, caption);
-    });
-    */
 
   }
 
