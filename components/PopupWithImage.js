@@ -8,7 +8,7 @@ export class PopupWithImage extends Popup {
 
   }
 
-  open(url, caption) {
+  open = (url, caption) => {
 
     if (url && caption) {
       imgUrl.src = url;

@@ -8,7 +8,7 @@ import {
   profileName,
   profileJob,
   elementsContainer,
-  popupEditProfile,
+  //popupEditProfile,
   //popupAddArticle,
   //popupImage,
   imgUrl,
@@ -27,11 +27,12 @@ import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { Popup } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
+import { popupWithForm } from '../components/PopupWithForm.js';
 
 let openedPopup;
 
 
-
+/*
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   openedPopup = popup;
@@ -42,7 +43,8 @@ function closePopup(popup) {
   popup.classList.remove('popup_opened');
   document.removeEventListener('keydown', checkPressedPopupButton);
 }
-
+*/
+/*
 function editProfileSubmitHandler(evt) {
   evt.preventDefault();
   profileName.textContent = formNameInput.value;
@@ -63,12 +65,14 @@ function addArticleSubmitHandler(evt) {
   formAddArticle.reset();
   formAddArticleValidator.toggleButtonState();
 }
-
+*/
+/*
 const renderCard = function (data) {
   const card = new Card(data, '#element');
   const cardElement = card.getCardElement();
   elementsContainer.prepend(cardElement);
 };
+*/
 
 /*
 export default function showImage(url, caption) {
@@ -80,20 +84,22 @@ export default function showImage(url, caption) {
   }
 }
 */
-
+/*
 formEditProfile.addEventListener('submit', editProfileSubmitHandler);
 formAddArticle.addEventListener('submit', addArticleSubmitHandler);
+*/
 
 //closePopupLinkProfile.addEventListener('click', () => closePopup(popupEditProfile));
 //closePopupLinkArticle.addEventListener('click', () => closePopup(popupAddArticle));
 //closePopupLinkImage.addEventListener('click', () => closePopup(popupImage));
 
+/*
 profileEditLink.addEventListener('click', () => {
   formNameInput.value = profileName.textContent;
   formJobInput.value = profileJob.textContent;
   openPopup(popupEditProfile);
 });
-addButton.addEventListener('click', () => openPopup(popupAddArticle));
+*/
 
 //Проверяем какая кнопка клавиатуры нажата
 /*
@@ -119,29 +125,36 @@ const enableOverlayClose = () => {
 
 enableOverlayClose();
 */
+const popupAddArticleNew = new popupWithForm(
+  '.popup_content_article',
+  {
+  handleFormSubmit: (inputData) => {
+    //console.log(inputData);
+  }
+});
 
+
+popupAddArticleNew.setEventListeners();
+addButton.addEventListener('click', () => popupAddArticleNew.open());
+
+const popupEditProfileNew = new popupWithForm('.popup_content_profile');
+popupEditProfileNew.setEventListeners();
+profileEditLink.addEventListener('click', () => popupEditProfileNew.open());
 
 const formEditProfileValidator = new FormValidator(settings, formEditProfile);
 formEditProfileValidator.enableValidation();
+
 const formAddArticleValidator= new FormValidator(settings, formAddArticle);
 formAddArticleValidator.enableValidation();
 
-/*
-initialCards.reverse().forEach((data) => {
-  renderCard(data);
-});
-*/
 
 const popupWithImageNew = new PopupWithImage('.popup_content_image');
 popupWithImageNew.setEventListeners();
 
 
+//const popupAddArticleNew = new Popup('.popup_content_article');
+//popupAddArticleNew.setEventListeners();
 
-const popupAddArticleNew = new Popup('.popup_content_article');
-popupAddArticleNew.setEventListeners();
-//popupAddArticleNew.open();
-
-//const popupImage = new PopupWithImage('.popup_content_image');
 
 
 // Добавляем начальные карточки
