@@ -1,19 +1,22 @@
-import showImage from './index.js';
+//import showImage from '/pages/index.js';
 
 export class Card {
-  constructor(data, cardSelector) {
+  constructor(data, {handleCardClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
   }
 
-  _handleClickImage = () => {
-    showImage(this._link, this._name);
-  };
 
   _handleClickRemove = () => {
     this._element.remove();
     this._element = null;
+  };
+
+  _handleClickImage = () => {
+    this._handleCardClick();
+    //console.log(3);
   };
 
   _getTemplate = () => {
