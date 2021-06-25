@@ -129,7 +129,7 @@ const popupAddArticleNew = new popupWithForm(
   '.popup_content_article',
   {
   handleFormSubmit: (inputData) => {
-    //console.log(inputData);
+    console.log(inputData);
   }
 });
 
