@@ -127,10 +127,22 @@ enableOverlayClose();
 */
 const popupAddArticleNew = new popupWithForm(
   '.popup_content_article',
-  {
-  handleFormSubmit: (inputData) => {
-    console.log(inputData);
-  }
+   (inputData) => {
+
+    const card = new Card({name: inputData.title, link: inputData.link}, {
+      handleCardClick: (event) => {
+        //console.log(item.name);
+        //console.log(item.link);
+        //console.log(popupWithImageNew);
+        popupWithImageNew.open(inputData.link, inputData.title);
+      }
+    },
+    '#element');
+
+    const cardElement = card.getCardElement();
+    console.log(cardElement);
+    defaultCardList.addItem(cardElement);
+
 });
 
 
