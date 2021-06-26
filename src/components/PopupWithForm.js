@@ -7,12 +7,13 @@ export class popupWithForm extends Popup {
     this._popup = document.querySelector(popupSelector);
     this._form = this._popup.querySelector('.form');
     this._popupCloseBtn = this._popup.querySelector('.popup__close');
+    this._inputList = Array.from(this._form.querySelectorAll('.form__text-input'));
   }
 
   _getInputValues = () => {
-    const inputList = Array.from(this._form.querySelectorAll('.form__text-input'));
+    //const inputList = Array.from(this._form.querySelectorAll('.form__text-input'));
     const inputValues = {};
-    inputList.forEach(input => {
+    this._inputList.forEach(input => {
       inputValues[input.name] = input.value;
       //console.log(input.name + input.value);
     });

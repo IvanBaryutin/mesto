@@ -21,6 +21,28 @@ import { UserInfo } from '../components/UserInfo.js';
 
 const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle'});
 
+
+function createCard(item) {
+  const card = new Card({name: item.name, link: item.link}, {
+    handleCardClick: (event) => {
+      popupWithImageNew.open(item.link, item.name);
+    }
+  },
+  '#element');
+  return card.getCardElement();
+}
+
+const popupAddArticleNew = new popupWithForm(
+  '.popup_content_article',
+   (inputData) => {
+
+    const cardElement = createCard(inputData);
+    //console.log(inputData);
+    defaultCardList.addItem(cardElement);
+
+});
+
+/*
 const popupAddArticleNew = new popupWithForm(
   '.popup_content_article',
    (inputData) => {
@@ -33,19 +55,21 @@ const popupAddArticleNew = new popupWithForm(
     '#element');
 
     const cardElement = card.getCardElement();
-    console.log(cardElement);
     defaultCardList.addItem(cardElement);
 
 });
+*/
 
 popupAddArticleNew.setEventListeners();
-addButton.addEventListener('click', () => popupAddArticleNew.open());
+addButton.addEventListener('click', () => {
+  formAddArticleValidator.toggleButtonState();
+  popupAddArticleNew.open();
+});
 
 
 const popupEditProfileNew = new popupWithForm(
   '.popup_content_profile',
     (inputData) => {
-      console.log(inputData);
       userInfo.setUserInfo(inputData.name, inputData.job);
 });
 
@@ -71,6 +95,19 @@ popupWithImageNew.setEventListeners();
 
 
 // Добавляем начальные карточки
+
+
+const defaultCardList = new Section({ data: initialCards,
+  renderer: (item) => {
+
+    const cardElement = createCard(item);
+    //console.log(item);
+    defaultCardList.addItem(cardElement);
+  },
+}, '.elements');
+
+
+/*
 const defaultCardList = new Section({ data: initialCards,
   renderer: (item) => {
   const card = new Card({name: item.name, link: item.link}, {
@@ -84,6 +121,7 @@ const defaultCardList = new Section({ data: initialCards,
   defaultCardList.addItem(cardElement);
   },
 }, '.elements');
+*/
 
 defaultCardList.renderItems();
 

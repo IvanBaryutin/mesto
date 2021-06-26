@@ -14,10 +14,11 @@ export class Card {
     this._element = null;
   };
 
+  /*
   _handleClickImage = () => {
     this._handleCardClick();
-    //console.log(3);
   };
+  */
 
   _getTemplate = () => {
     const elementTemplate = document.querySelector(this._cardSelector).content;
@@ -52,7 +53,8 @@ export class Card {
 
     // добавим обработчик клика по картинке
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      this._handleClickImage();
+      //this._handleClickImage();
+      this._handleCardClick();
     });
 
   }
