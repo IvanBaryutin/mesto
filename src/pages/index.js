@@ -30,14 +30,14 @@ export const api = new Api({
 
 api.getUserInfo()
 .then(res =>{
-  console.log(res);
+  //console.log(res);
   userInfo.setUserInfo(res);
-  //userInfo.setAvatar(res.avatar);
+  userInfo.setAvatar(res);
   //userID = res._id;
 });
 
 // Экземпляр класса UserInfo
-const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle'});
+const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
 
 // Функция создания новой карточки, возвращает элемент <article>
 function createCard(item) {
