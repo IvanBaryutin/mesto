@@ -4,14 +4,13 @@ export class UserInfo {
     this._jobSelector = jobSelector;
     this._userInfo = {};
     this._name = document.querySelector(usernameSelector);
-    this._job= document.querySelector(jobSelector);
+    this._about= document.querySelector(jobSelector);
     this._avatar = document.querySelector(avatarSelector);
   }
 
   setUserInfo = ({name, about}) => {
-    //console.log(name, about);
     this._name.textContent = name;
-    this._job.textContent = about;
+    this._about.textContent = about;
   }
 
   setAvatar = ({avatar}) => {
@@ -20,9 +19,11 @@ export class UserInfo {
     //console.log(`url(${avatar})`);
   }
 
+  // Заполняет поля данными при открытии формы
   getUserInfo = () => {
     this._userInfo.name = this._name.textContent;
-    this._userInfo.job = this._job.textContent;
+    this._userInfo.about = this._about.textContent;
+    //console.log(this._userInfo);
     return this._userInfo;
   }
 

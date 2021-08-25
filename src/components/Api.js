@@ -16,11 +16,27 @@ export class Api {
   }
 
   getInitialCards() {
-    //this._headers['Content-Type'] = 'application/json';
-    //console.log(this._headers);
     return fetch(`${this._baseUrl}/cards`, {
       method: 'GET',
       headers: this._headers,
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
+  setUserInfo = (user) =>{
+    this._headers['Content-Type'] = 'application/json';
+    //console.log(this._headers);
+    //console.log(user);
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: user.name,
+        about: user.about
+        //avatar: user.avatar
+      })
     })
     .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then

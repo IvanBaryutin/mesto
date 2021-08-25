@@ -108,7 +108,9 @@ addButton.addEventListener('click', () => {
 const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
     (inputData) => {
-      userInfo.setUserInfo(inputData.name, inputData.job);
+      //console.log(inputData);
+      userInfo.setUserInfo(inputData);
+      api.setUserInfo(inputData);
 });
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupEditProfileNew.setEventListeners();
@@ -118,7 +120,7 @@ profileEditLink.addEventListener('click', () => {
   popupEditProfileNew.open();
   const inputValues = userInfo.getUserInfo();
   formNameInput.value = inputValues.name;
-  formJobInput.value = inputValues.job;
+  formJobInput.value = inputValues.about;
 });
 
 // Добавляем валидаторы форм
