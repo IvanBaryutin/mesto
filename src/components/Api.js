@@ -15,4 +15,16 @@ export class Api {
     })
   }
 
+  getInitialCards() {
+    //this._headers['Content-Type'] = 'application/json';
+    //console.log(this._headers);
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'GET',
+      headers: this._headers,
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
 }

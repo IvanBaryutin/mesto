@@ -28,12 +28,19 @@ export const api = new Api({
   }
 });
 
+// Загружаем информацию о пользователе с сервера
 api.getUserInfo()
 .then(res =>{
   //console.log(res);
   userInfo.setUserInfo(res);
   userInfo.setAvatar(res);
   //userID = res._id;
+});
+
+// Загружаем начальные карточки с сервера
+api.getInitialCards()
+.then(res =>{
+  loadInitialCards(res);
 });
 
 // Экземпляр класса UserInfo
@@ -49,6 +56,20 @@ function createCard(item) {
   '#element');
   return card.getCardElement();
 }
+
+// Функция отрисовки карточек
+function loadInitialCards(initialCards) {
+  console.log(initialCards);
+  const defaultCardList = new Section({ data: initialCards,
+    renderer: (item) => {
+      const cardElement = createCard(item);
+      console.log(item);
+      defaultCardList.addItem(cardElement);
+    },
+  }, '.elements');
+  defaultCardList.renderItems();
+}
+
 
 // Экземпляр класса для попапа с формой добавления карточки, передаем в качестве аргумента функцию в handleFormSubmit
 // которая по факту выполняется при сабмите формы
@@ -118,6 +139,7 @@ popupWithImageNew.setEventListeners();
 
 
 // Добавляем начальные карточки, передаем функцию для использования в методе класса
+/*
 const defaultCardList = new Section({ data: initialCards,
   renderer: (item) => {
 
@@ -126,6 +148,7 @@ const defaultCardList = new Section({ data: initialCards,
     defaultCardList.addItem(cardElement);
   },
 }, '.elements');
+*/
 
 
 /*
@@ -144,5 +167,5 @@ const defaultCardList = new Section({ data: initialCards,
 }, '.elements');
 */
 
-defaultCardList.renderItems();
+
 

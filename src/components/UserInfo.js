@@ -9,15 +9,15 @@ export class UserInfo {
   }
 
   setUserInfo = ({name, about}) => {
-    console.log(name, about);
+    //console.log(name, about);
     this._name.textContent = name;
     this._job.textContent = about;
   }
 
   setAvatar = ({avatar}) => {
-    console.log(avatar);
+    //console.log(avatar);
     this._avatar.style.backgroundImage=`url(${avatar})`;
-    console.log(`url(${avatar})`);
+    //console.log(`url(${avatar})`);
   }
 
   getUserInfo = () => {
