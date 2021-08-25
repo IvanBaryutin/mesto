@@ -1,4 +1,4 @@
-//Массив данных для карточек elements
+//Массив данных для начальных карточек elements
 export const initialCards = [
   {
     name: 'Архыз',
@@ -27,39 +27,39 @@ export const initialCards = [
 ];
 
 //Кнопки
-export const profileEditLink = document.querySelector('.profile__edit-button');
-export const addButton = document.querySelector('.profile__addbutton');
-export const closePopupLinkProfile = document.querySelector('.popup__close_content_profile');
-export const closePopupLinkArticle = document.querySelector('.popup__close_content_article');
-export const closePopupLinkImage = document.querySelector('.popup__close_content_image');
+export const profileEditLink = document.querySelector('.profile__edit-button'); // Кнопка открытия окна Редактировать профиль
+export const addButton = document.querySelector('.profile__addbutton'); // Кнопка открытия формы Добавить карточку
+export const closePopupLinkProfile = document.querySelector('.popup__close_content_profile'); // Кнопка закрытия формы Редактировать профиль
+export const closePopupLinkArticle = document.querySelector('.popup__close_content_article'); // Кнопка закрытия формы Добавить карточку
+export const closePopupLinkImage = document.querySelector('.popup__close_content_image'); // Кнопка закрытия попапа с картинкой
 
 
-export const profileName = document.querySelector('.profile__name');
-export const profileJob = document.querySelector('.profile__subtitle');
+export const profileName = document.querySelector('.profile__name'); // Заголовок h1 с именем
+export const profileJob = document.querySelector('.profile__subtitle'); // Параграф с профессией
 
-export const elementsContainer = document.querySelector('.elements');
+export const elementsContainer = document.querySelector('.elements'); // Секция с карточками
 
 
 //Модальные окна
-export const popupEditProfile = document.querySelector('.popup_content_profile');
-export const popupAddArticle = document.querySelector('.popup_content_article');
-export const popupImage = document.querySelector('.popup_content_image');
-export const imgUrl = popupImage.querySelector('.popup__image');
-export const imgCaption = popupImage.querySelector('.popup__figcaption');
+export const popupEditProfile = document.querySelector('.popup_content_profile'); // Попап с формой Редактировать профиль
+export const popupAddArticle = document.querySelector('.popup_content_article'); // Попап с формой Добавить карточку
+export const popupImage = document.querySelector('.popup_content_image'); // Попап с детальной картинкой
+export const imgUrl = popupImage.querySelector('.popup__image'); // img большого изображения
+export const imgCaption = popupImage.querySelector('.popup__figcaption'); // Блок div описания картинки
 
 
 //Поля ввода форм
-export const formNameInput = popupEditProfile.querySelector('.form__text-input_name_name');
-export const formJobInput = popupEditProfile.querySelector('.form__text-input_name_job');
-export const formTitleInput = popupAddArticle.querySelector('.form__text-input_name_title');
-export const formLinkInput = popupAddArticle.querySelector('.form__text-input_name_link');
+export const formNameInput = popupEditProfile.querySelector('.form__text-input_name_name'); // Поле Имя
+export const formJobInput = popupEditProfile.querySelector('.form__text-input_name_job'); // Поле Профессия
+export const formTitleInput = popupAddArticle.querySelector('.form__text-input_name_title'); // Поле Название места
+export const formLinkInput = popupAddArticle.querySelector('.form__text-input_name_link'); // Поле Ссылка на картинку
 
 
 //Формы
-export const formEditProfile = popupEditProfile.querySelector('.form');
-export const formAddArticle = popupAddArticle.querySelector('.form');
+export const formEditProfile = popupEditProfile.querySelector('.form'); // Форма Редактировать профиль
+export const formAddArticle = popupAddArticle.querySelector('.form'); // Форма Добавить карточку
 
-
+// Настройки с селекторами для валидации
 export const settings = {
   formSelector: '.form',
   inputSelector: '.form__text-input',

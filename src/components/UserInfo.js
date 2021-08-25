@@ -8,8 +8,6 @@ export class UserInfo {
   }
 
   setUserInfo = (name, job) => {
-    //document.querySelector(this._usernameSelector).textContent = name;
-    //document.querySelector(this._jobSelector).textContent = job;
     this._name.textContent = name;
     this._job.textContent = job;
   }

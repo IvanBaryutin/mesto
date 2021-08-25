@@ -13,15 +13,14 @@ import {
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
-//import { Popup } from '../components/Popup.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
-import { popupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
 
-
+// Экземпляр класса UserInfo
 const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle'});
 
-
+// Функция создания новой карточки, возвращает элемент <article>
 function createCard(item) {
   const card = new Card({name: item.name, link: item.link}, {
     handleCardClick: (event) => {
@@ -32,18 +31,20 @@ function createCard(item) {
   return card.getCardElement();
 }
 
-const popupAddArticleNew = new popupWithForm(
+// Экземпляр класса для попапа с формой добавления карточки, передаем в качестве аргумента функцию в handleFormSubmit
+// которая по факту выполняется при сабмите формы
+const popupAddArticleNew = new PopupWithForm(
   '.popup_content_article',
-   (inputData) => {
-
+  (inputData) => {
     const cardElement = createCard(inputData);
-    //console.log(inputData);
     defaultCardList.addItem(cardElement);
-
-});
+  }
+);
+// Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
+popupAddArticleNew.setEventListeners();
 
 /*
-const popupAddArticleNew = new popupWithForm(
+const popupAddArticleNew = new PopupWithForm(
   '.popup_content_article',
    (inputData) => {
 
@@ -60,20 +61,23 @@ const popupAddArticleNew = new popupWithForm(
 });
 */
 
-popupAddArticleNew.setEventListeners();
+// Добавляем слушатель на клик по кнопке Добавить карточку
 addButton.addEventListener('click', () => {
-  formAddArticleValidator.toggleButtonState();
+  formAddArticleValidator.toggleButtonState(); // Выставим правильное состояние кнопки перед открытием попапа
   popupAddArticleNew.open();
 });
 
-
-const popupEditProfileNew = new popupWithForm(
+// Экземпляр класса для попапа с формой Редактировать профиль, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
+// которая по факту выполняется при сабмите формы
+const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
     (inputData) => {
       userInfo.setUserInfo(inputData.name, inputData.job);
 });
-
+// Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupEditProfileNew.setEventListeners();
+
+// Добавляем слушателя клика к кнопке Редактировать профиль:
 profileEditLink.addEventListener('click', () => {
   popupEditProfileNew.open();
   const inputValues = userInfo.getUserInfo();
@@ -81,8 +85,7 @@ profileEditLink.addEventListener('click', () => {
   formJobInput.value = inputValues.job;
 });
 
-
-
+// Добавляем валидаторы форм
 const formEditProfileValidator = new FormValidator(settings, formEditProfile);
 formEditProfileValidator.enableValidation();
 
@@ -90,13 +93,12 @@ const formAddArticleValidator= new FormValidator(settings, formAddArticle);
 formAddArticleValidator.enableValidation();
 
 
+
 const popupWithImageNew = new PopupWithImage('.popup_content_image');
 popupWithImageNew.setEventListeners();
 
 
-// Добавляем начальные карточки
-
-
+// Добавляем начальные карточки, передаем функцию для использования в методе класса
 const defaultCardList = new Section({ data: initialCards,
   renderer: (item) => {
 
