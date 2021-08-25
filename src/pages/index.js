@@ -16,6 +16,25 @@ import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
 import { UserInfo } from '../components/UserInfo.js';
+import { Api } from '../components/Api.js';
+
+
+export const api = new Api({
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-25',
+  headers: {
+    authorization: '1e5c33de-1f37-4db9-b61a-be6eb6c35223'
+    //'Content-Type': 'application/json',
+    //'Access-Control-Allow-Origin': 'origin-list'
+  }
+});
+
+api.getUserInfo()
+.then(res =>{
+  console.log(res);
+  userInfo.setUserInfo(res);
+  //userInfo.setAvatar(res.avatar);
+  //userID = res._id;
+});
 
 // Экземпляр класса UserInfo
 const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle'});
