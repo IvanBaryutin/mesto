@@ -1,6 +1,6 @@
 import './index.css'; // добавьте импорт главного файла стилей
 import {
-  initialCards,
+  //initialCards,
   profileEditLink,
   addButton,
   formNameInput,
@@ -9,6 +9,8 @@ import {
   formAddArticle,
   settings
 } from '../utils/constants.js';
+
+let defaultCardList;
 
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -40,7 +42,14 @@ api.getUserInfo()
 // Загружаем начальные карточки с сервера
 api.getInitialCards()
 .then(res =>{
-  loadInitialCards(res);
+  defaultCardList = new Section({ data: res,
+    renderer: (item) => {
+      const cardElement = createCard(item);
+      //console.log(item);
+      defaultCardList.addItem(cardElement);
+    },
+  }, '.elements');
+  defaultCardList.renderItems();
 });
 
 // Экземпляр класса UserInfo
@@ -55,19 +64,6 @@ function createCard(item) {
   },
   '#element');
   return card.getCardElement();
-}
-
-// Функция отрисовки карточек
-function loadInitialCards(initialCards) {
-  console.log(initialCards);
-  const defaultCardList = new Section({ data: initialCards,
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      console.log(item);
-      defaultCardList.addItem(cardElement);
-    },
-  }, '.elements');
-  defaultCardList.renderItems();
 }
 
 
