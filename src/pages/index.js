@@ -42,7 +42,7 @@ api.getUserInfo()
 // Загружаем начальные карточки с сервера
 api.getInitialCards()
 .then(res =>{
-  defaultCardList = new Section({ data: res,
+  defaultCardList = new Section({ data: res.reverse(),
     renderer: (item) => {
       const cardElement = createCard(item);
       //console.log(item);
@@ -72,8 +72,11 @@ function createCard(item) {
 const popupAddArticleNew = new PopupWithForm(
   '.popup_content_article',
   (inputData) => {
-    const cardElement = createCard(inputData);
-    defaultCardList.addItem(cardElement);
+    api.addCard(inputData)
+    .then(res =>{
+      const cardElement = createCard(inputData);
+      defaultCardList.addItem(cardElement);
+    });
   }
 );
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам

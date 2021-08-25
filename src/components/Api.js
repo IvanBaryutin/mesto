@@ -43,4 +43,21 @@ export class Api {
     })
   }
 
+  addCard = (card) =>{
+    this._headers['Content-Type'] = 'application/json';
+    console.log(card);
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        name: card.name,
+        link: card.link
+        //avatar: user.avatar
+      })
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
 }
