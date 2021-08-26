@@ -77,7 +77,7 @@ const popupAddArticleNew = new PopupWithForm(
   (inputData) => {
     api.addCard(inputData)
     .then(res =>{
-      const cardElement = createCard(inputData);
+      const cardElement = createCard(res);
       defaultCardList.addItem(cardElement);
     });
   }
@@ -115,8 +115,12 @@ const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
     (inputData) => {
       //console.log(inputData);
-      userInfo.setUserInfo(inputData);
-      api.setUserInfo(inputData);
+      api.setUserInfo(inputData)
+      .then(res =>{
+        //console.log(res);
+        userInfo.setUserInfo(res);
+      });
+
 });
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupEditProfileNew.setEventListeners();
