@@ -27,8 +27,6 @@ export class Api {
 
   setUserInfo = (user) =>{
     this._headers['Content-Type'] = 'application/json';
-    //console.log(this._headers);
-    //console.log(user);
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
       headers: this._headers,
@@ -45,7 +43,6 @@ export class Api {
 
   addCard = (card) =>{
     this._headers['Content-Type'] = 'application/json';
-    //console.log(card);
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
@@ -53,6 +50,17 @@ export class Api {
         name: card.name,
         link: card.link
       })
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
+  deleteCard = (cardId) =>{
+    this._headers['Content-Type'] = 'application/json';
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
     })
     .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then

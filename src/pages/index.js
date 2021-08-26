@@ -36,7 +36,6 @@ export const api = new Api({
 // Загружаем информацию о пользователе с сервера
 api.getUserInfo()
 .then(res =>{
-  //console.log(res);
   userInfo.setUserInfo(res);
   userInfo.setAvatar(res);
   userID = res._id;
@@ -48,7 +47,6 @@ api.getInitialCards()
   defaultCardList = new Section({ data: res.reverse(),
     renderer: (item) => {
       const cardElement = createCard(item);
-      //console.log(item);
       defaultCardList.addItem(cardElement);
     },
   }, '.elements');
@@ -63,6 +61,19 @@ function createCard(item) {
   const card = new Card(item, userID, {
     handleCardClick: (event) => {
       popupWithImageNew.open(item.link, item.name);
+    },
+    handleClickRemove: (event) => {
+      popupApproveDelete.open();
+      popupApproveDelete.setNewFormSubmit(
+        () => {
+          //console.log(item);
+          api.deleteCard(item._id)
+          .then(res =>{
+            //console.log(res);
+            card.remove();
+          });
+        }
+      )
     }
   },
   '#element');
@@ -85,23 +96,6 @@ const popupAddArticleNew = new PopupWithForm(
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupAddArticleNew.setEventListeners();
 
-/*
-const popupAddArticleNew = new PopupWithForm(
-  '.popup_content_article',
-   (inputData) => {
-
-    const card = new Card({name: inputData.title, link: inputData.link}, {
-      handleCardClick: (event) => {
-        popupWithImageNew.open(inputData.link, inputData.title);
-      }
-    },
-    '#element');
-
-    const cardElement = card.getCardElement();
-    defaultCardList.addItem(cardElement);
-
-});
-*/
 
 // Добавляем слушатель на клик по кнопке Добавить карточку
 addButton.addEventListener('click', () => {
@@ -114,10 +108,8 @@ addButton.addEventListener('click', () => {
 const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
     (inputData) => {
-      //console.log(inputData);
       api.setUserInfo(inputData)
       .then(res =>{
-        //console.log(res);
         userInfo.setUserInfo(res);
       });
 
@@ -147,14 +139,12 @@ profileEditLink.addEventListener('click', () => {
 const popupUpdateAvatar = new PopupWithForm(
   '.popup_content_update',
     (inputData) => {
-      //console.log(inputData);
       api.updateAvatar(inputData)
       .then(res =>{
-        //console.log(res);
         userInfo.setAvatar(res);
       });
 });
-// Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
+// Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupUpdateAvatar.setEventListeners();
 
 // Добавляем слушатель на клик по кнопке Добавить карточку
@@ -165,6 +155,22 @@ avatarEditLink.addEventListener('click', () => {
 
 
 
+
+
+
+// Экземпляр класса для попапа с кнопкой подтверждения удаления карточки, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
+const popupApproveDelete = new PopupWithForm(
+  '.popup_content_confirm');
+// Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам
+popupApproveDelete.setEventListeners();
+
+// Добавляем слушатель на клик по кнопке Добавить карточку
+/*
+avatarEditLink.addEventListener('click', () => {
+  //formAddArticleValidator.toggleButtonState(); // Выставим правильное состояние кнопки перед открытием попапа
+  popupApproveDelete.open();
+});
+*/
 
 
 
@@ -193,36 +199,3 @@ formUpdateAvatarValidator.enableValidation();
 
 const popupWithImageNew = new PopupWithImage('.popup_content_image');
 popupWithImageNew.setEventListeners();
-
-
-// Добавляем начальные карточки, передаем функцию для использования в методе класса
-/*
-const defaultCardList = new Section({ data: initialCards,
-  renderer: (item) => {
-
-    const cardElement = createCard(item);
-    //console.log(item);
-    defaultCardList.addItem(cardElement);
-  },
-}, '.elements');
-*/
-
-
-/*
-const defaultCardList = new Section({ data: initialCards,
-  renderer: (item) => {
-  const card = new Card({name: item.name, link: item.link}, {
-    handleCardClick: (event) => {
-      popupWithImageNew.open(item.link, item.name);
-    }
-  },
-  '#element');
-
-  const cardElement = card.getCardElement();
-  defaultCardList.addItem(cardElement);
-  },
-}, '.elements');
-*/
-
-
-

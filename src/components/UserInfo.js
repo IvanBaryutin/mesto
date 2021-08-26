@@ -14,16 +14,13 @@ export class UserInfo {
   }
 
   setAvatar = ({avatar}) => {
-    //console.log(avatar);
     this._avatar.style.backgroundImage=`url(${avatar})`;
-    //console.log(`url(${avatar})`);
   }
 
   // Заполняет поля данными при открытии формы
   getUserInfo = () => {
     this._userInfo.name = this._name.textContent;
     this._userInfo.about = this._about.textContent;
-    //console.log(this._userInfo);
     return this._userInfo;
   }
 

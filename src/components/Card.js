@@ -1,27 +1,22 @@
 //import showImage from '/pages/index.js';
 
 export class Card {
-  constructor(data, userID, {handleCardClick}, cardSelector) {
+  constructor(data, userID, {handleCardClick, handleClickRemove}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._handleClickRemove  = handleClickRemove;
     this._userID = userID;
     this._owner = data.owner
-    //console.log(this);
   }
 
-
+  /*
   _handleClickRemove = () => {
     this._element.remove();
     this._element = null;
-  };
-
-  /*
-  _handleClickImage = () => {
-    this._handleCardClick();
   };
   */
 
@@ -78,6 +73,11 @@ export class Card {
       this._handleCardClick();
     });
 
+  }
+
+  remove = () => {
+    this._element.remove();
+    this._element = null;
   }
 
 }

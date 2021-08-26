@@ -52,6 +52,7 @@ export const imgUrl = popupImage.querySelector('.popup__image'); // img боль
 export const imgCaption = popupImage.querySelector('.popup__figcaption'); // Блок div описания картинки
 
 export const popupUpdateAvatar = document.querySelector('.popup_content_update'); // Попап с формой Обновить аватар
+export const popupApproveDelete = document.querySelector('.popup_content_confirm'); // Попап с формой подтверждения удаления карточки
 
 
 //Поля ввода форм
@@ -65,7 +66,8 @@ export const formLinkInput = popupAddArticle.querySelector('.form__text-input_na
 export const formEditProfile = popupEditProfile.querySelector('.form'); // Форма Редактировать профиль
 export const formAddArticle = popupAddArticle.querySelector('.form'); // Форма Добавить карточку
 
-export const formUpdateAvatar = popupUpdateAvatar .querySelector('.form'); // Форма Добавить карточку
+export const formUpdateAvatar = popupUpdateAvatar.querySelector('.form'); // Форма Обновить аватар
+export const formApproveDelete = popupApproveDelete.querySelector('.form'); // Форма Подтвердить удаление карточки
 
 // Настройки с селекторами для валидации
 export const settings = {
