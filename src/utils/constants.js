@@ -31,6 +31,8 @@ export const initialCards = [
 //Кнопки
 export const profileEditLink = document.querySelector('.profile__edit-button'); // Кнопка открытия окна Редактировать профиль
 export const addButton = document.querySelector('.profile__addbutton'); // Кнопка открытия формы Добавить карточку
+export const avatarEditLink = document.querySelector('.profile__avatar-button'); // Кнопка открытия формы Обновить аватар
+
 export const closePopupLinkProfile = document.querySelector('.popup__close_content_profile'); // Кнопка закрытия формы Редактировать профиль
 export const closePopupLinkArticle = document.querySelector('.popup__close_content_article'); // Кнопка закрытия формы Добавить карточку
 export const closePopupLinkImage = document.querySelector('.popup__close_content_image'); // Кнопка закрытия попапа с картинкой
@@ -49,6 +51,8 @@ export const popupImage = document.querySelector('.popup_content_image'); // П�
 export const imgUrl = popupImage.querySelector('.popup__image'); // img большого изображения
 export const imgCaption = popupImage.querySelector('.popup__figcaption'); // Блок div описания картинки
 
+export const popupUpdateAvatar = document.querySelector('.popup_content_update'); // Попап с формой Обновить аватар
+
 
 //Поля ввода форм
 export const formNameInput = popupEditProfile.querySelector('.form__text-input_name_name'); // Поле Имя
@@ -60,6 +64,8 @@ export const formLinkInput = popupAddArticle.querySelector('.form__text-input_na
 //Формы
 export const formEditProfile = popupEditProfile.querySelector('.form'); // Форма Редактировать профиль
 export const formAddArticle = popupAddArticle.querySelector('.form'); // Форма Добавить карточку
+
+export const formUpdateAvatar = popupUpdateAvatar .querySelector('.form'); // Форма Добавить карточку
 
 // Настройки с селекторами для валидации
 export const settings = {

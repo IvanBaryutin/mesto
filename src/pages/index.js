@@ -2,11 +2,13 @@ import './index.css'; // добавьте импорт главного файл
 import {
   //initialCards,
   profileEditLink,
+  avatarEditLink,
   addButton,
   formNameInput,
   formJobInput,
   formEditProfile,
   formAddArticle,
+  formUpdateAvatar,
   settings
 } from '../utils/constants.js';
 
@@ -34,7 +36,7 @@ export const api = new Api({
 // Загружаем информацию о пользователе с сервера
 api.getUserInfo()
 .then(res =>{
-  console.log(res);
+  //console.log(res);
   userInfo.setUserInfo(res);
   userInfo.setAvatar(res);
   userID = res._id;
@@ -127,12 +129,61 @@ profileEditLink.addEventListener('click', () => {
   formJobInput.value = inputValues.about;
 });
 
+
+
+
+
+
+
+
+
+
+
+// Экземпляр класса для попапа с формой Редактировать профиль, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
+const popupUpdateAvatar = new PopupWithForm(
+  '.popup_content_update',
+    (inputData) => {
+      //console.log(inputData);
+      api.updateAvatar(inputData)
+      .then(res =>{
+        //console.log(res);
+        userInfo.setAvatar(res);
+      });
+});
+// Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
+popupUpdateAvatar.setEventListeners();
+
+// Добавляем слушатель на клик по кнопке Добавить карточку
+avatarEditLink.addEventListener('click', () => {
+  //formAddArticleValidator.toggleButtonState(); // Выставим правильное состояние кнопки перед открытием попапа
+  popupUpdateAvatar.open();
+});
+
+
+
+
+
+
+
+
+
+// Добавляем слушателя клика к кнопке Редактировать профиль:
+profileEditLink.addEventListener('click', () => {
+  popupEditProfileNew.open();
+  const inputValues = userInfo.getUserInfo();
+  formNameInput.value = inputValues.name;
+  formJobInput.value = inputValues.about;
+});
+
 // Добавляем валидаторы форм
 const formEditProfileValidator = new FormValidator(settings, formEditProfile);
 formEditProfileValidator.enableValidation();
 
 const formAddArticleValidator= new FormValidator(settings, formAddArticle);
 formAddArticleValidator.enableValidation();
+
+const formUpdateAvatarValidator= new FormValidator(settings, formUpdateAvatar);
+formUpdateAvatarValidator.enableValidation();
 
 
 

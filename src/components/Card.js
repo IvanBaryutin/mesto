@@ -50,9 +50,7 @@ export class Card {
     this._image.alt = this._name + ' фото';
     this._element.querySelector('.element__like-counter').textContent = this._getNumberOfLikes();
     if (this._isCardOwner() == false) {
-      //this._element.querySelector('.element__delete-icon').remove(); // Удаляем иконку удаления, если не автор
-      console.log(this._element.querySelector('.element__delete-icon'));
-      this._element.querySelector('.element__delete-icon').remove();
+      this._element.querySelector('.element__delete-icon').remove(); // Удаляем кнопку удаление, если не наша карточка
     }
     this._setEventListeners();
 

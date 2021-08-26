@@ -52,7 +52,20 @@ export class Api {
       body: JSON.stringify({
         name: card.name,
         link: card.link
-        //avatar: user.avatar
+      })
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
+  updateAvatar = ({avatar}) =>{
+    this._headers['Content-Type'] = 'application/json';
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({
+      avatar: avatar
       })
     })
     .then((res) => {
