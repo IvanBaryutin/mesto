@@ -1,14 +1,15 @@
 //import showImage from '/pages/index.js';
 
 export class Card {
-  constructor(data, userID, {handleCardClick, handleClickRemove}, cardSelector) {
+  constructor(data, userID, {handleCardClick, handleRemoveClick, handleLikeClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleClickRemove  = handleClickRemove;
+    this._handleRemoveClick  = handleRemoveClick;
+    this._handleLikeClick  = handleLikeClick;
     this._userID = userID;
     this._owner = data.owner
   }
@@ -56,14 +57,15 @@ export class Card {
 
     // добавим обработчик клика по like
     this._element.querySelector('.element__like-icon').addEventListener('click', function (event) {
-      event.target.classList.toggle('element__like-icon_active');
+      //event.target.classList.toggle('element__like-icon_active');
+      this._handleLikeClick();
     });
 
     // добавим обработчик клика по delete
     // Только если это наша карточка
     if (this._isCardOwner() == true) {
       this._element.querySelector('.element__delete-icon').addEventListener('click', () => {
-        this._handleClickRemove();
+        this._handleRemoveClick();
       })
     }
 
