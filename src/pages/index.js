@@ -11,6 +11,7 @@ import {
 } from '../utils/constants.js';
 
 let defaultCardList;
+let userID;
 
 import { Card } from '../components/Card.js';
 import { FormValidator } from '../components/FormValidator.js';
@@ -33,10 +34,10 @@ export const api = new Api({
 // Загружаем информацию о пользователе с сервера
 api.getUserInfo()
 .then(res =>{
-  //console.log(res);
+  console.log(res);
   userInfo.setUserInfo(res);
   userInfo.setAvatar(res);
-  //userID = res._id;
+  userID = res._id;
 });
 
 // Загружаем начальные карточки с сервера
@@ -57,7 +58,7 @@ const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: 
 
 // Функция создания новой карточки, возвращает элемент <article>
 function createCard(item) {
-  const card = new Card({name: item.name, link: item.link}, {
+  const card = new Card(item, userID, {
     handleCardClick: (event) => {
       popupWithImageNew.open(item.link, item.name);
     }

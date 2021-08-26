@@ -1,3 +1,4 @@
+/*
 //Массив данных для начальных карточек elements
 export const initialCards = [
   {
@@ -25,6 +26,7 @@ export const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+*/
 
 //Кнопки
 export const profileEditLink = document.querySelector('.profile__edit-button'); // Кнопка открытия окна Редактировать профиль

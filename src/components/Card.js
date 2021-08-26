@@ -1,11 +1,16 @@
 //import showImage from '/pages/index.js';
 
 export class Card {
-  constructor(data, {handleCardClick}, cardSelector) {
+  constructor(data, userID, {handleCardClick}, cardSelector) {
     this._name = data.name;
     this._link = data.link;
+    this._likes = data.likes;
+    this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
+    this._userID = userID;
+    this._owner = data.owner
+    //console.log(this);
   }
 
 
@@ -27,13 +32,28 @@ export class Card {
     return cardElement;
   }
 
+  _getNumberOfLikes = () => {
+    return this._likes ? this._likes.length : 0;
+  }
+
+  _isCardOwner = () => {
+    return this._owner._id === this._userID ? true : false;
+  }
+
   getCardElement = () => {
     this._element = this._getTemplate();
     //const articleImage = this._element.querySelector('.element__image');
     this._image = this._element.querySelector('.element__image');
     this._element.querySelector('.element__title').textContent = this._name;
+    this._element.setAttribute('id', this._id);
     this._image.src = this._link;
     this._image.alt = this._name + ' фото';
+    this._element.querySelector('.element__like-counter').textContent = this._getNumberOfLikes();
+    if (this._isCardOwner() == false) {
+      //this._element.querySelector('.element__delete-icon').remove(); // Удаляем иконку удаления, если не автор
+      console.log(this._element.querySelector('.element__delete-icon'));
+      this._element.querySelector('.element__delete-icon').remove();
+    }
     this._setEventListeners();
 
     return this._element;
@@ -47,9 +67,12 @@ export class Card {
     });
 
     // добавим обработчик клика по delete
-    this._element.querySelector('.element__delete-icon').addEventListener('click', () => {
-      this._handleClickRemove();
-    });
+    // Только если это наша карточка
+    if (this._isCardOwner() == true) {
+      this._element.querySelector('.element__delete-icon').addEventListener('click', () => {
+        this._handleClickRemove();
+      })
+    }
 
     // добавим обработчик клика по картинке
     this._element.querySelector('.element__image').addEventListener('click', () => {

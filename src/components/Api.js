@@ -45,7 +45,7 @@ export class Api {
 
   addCard = (card) =>{
     this._headers['Content-Type'] = 'application/json';
-    console.log(card);
+    //console.log(card);
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
       headers: this._headers,
