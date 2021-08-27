@@ -33,7 +33,6 @@ export class Api {
       body: JSON.stringify({
         name: user.name,
         about: user.about
-        //avatar: user.avatar
       })
     })
     .then((res) => {

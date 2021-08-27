@@ -63,8 +63,6 @@ function createCard(item) {
       popupWithImageNew.open(item.link, item.name);
     },
     handleLikeClick: (event, status) => {
-      //event.target.classList.toggle('element__like-icon_active');
-
       if (status == false) {
         api.setLike(item._id)
           .then(res =>{
@@ -78,9 +76,6 @@ function createCard(item) {
             card.setNumberOfLikes(res.likes.length);
           });
       }
-
-      //console.log(event.target);
-      //console.log(status);
     },
     handleRemoveClick: (event) => {
       popupApproveDelete.open();
@@ -146,13 +141,6 @@ profileEditLink.addEventListener('click', () => {
 
 
 
-
-
-
-
-
-
-
 // Экземпляр класса для попапа с формой Редактировать профиль, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
 const popupUpdateAvatar = new PopupWithForm(
   '.popup_content_update',
@@ -172,27 +160,11 @@ avatarEditLink.addEventListener('click', () => {
 });
 
 
-
-
-
-
 // Экземпляр класса для попапа с кнопкой подтверждения удаления карточки, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
 const popupApproveDelete = new PopupWithForm(
   '.popup_content_confirm');
 // Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupApproveDelete.setEventListeners();
-
-// Добавляем слушатель на клик по кнопке Добавить карточку
-/*
-avatarEditLink.addEventListener('click', () => {
-  //formAddArticleValidator.toggleButtonState(); // Выставим правильное состояние кнопки перед открытием попапа
-  popupApproveDelete.open();
-});
-*/
-
-
-
-
 
 
 // Добавляем слушателя клика к кнопке Редактировать профиль:
@@ -212,8 +184,6 @@ formAddArticleValidator.enableValidation();
 
 const formUpdateAvatarValidator= new FormValidator(settings, formUpdateAvatar);
 formUpdateAvatarValidator.enableValidation();
-
-
 
 const popupWithImageNew = new PopupWithImage('.popup_content_image');
 popupWithImageNew.setEventListeners();

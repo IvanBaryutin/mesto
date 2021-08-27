@@ -72,7 +72,6 @@ export class Card {
 
     // добавим обработчик клика по like
     this._element.querySelector('.element__like-icon').addEventListener('click', (event) => {
-      //event.target.classList.toggle('element__like-icon_active');
       this._handleLikeClick(event, this._status);
     });
 
@@ -86,7 +85,6 @@ export class Card {
 
     // добавим обработчик клика по картинке
     this._element.querySelector('.element__image').addEventListener('click', () => {
-      //this._handleClickImage();
       this._handleCardClick();
     });
 
