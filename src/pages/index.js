@@ -62,18 +62,10 @@ function createCard(item) {
     handleCardClick: (event) => {
       popupWithImageNew.open(item.link, item.name);
     },
-    handleRemoveClick: (event) => {
-      popupApproveDelete.open();
-      popupApproveDelete.setNewFormSubmit(
-        () => {
-          api.deleteCard(item._id)
-          .then(res =>{
-            card.remove();
-          });
-        }
-      )
-    },
     handleLikeClick: (event) => {
+      event.target.classList.toggle('element__like-icon_active');
+    },
+    handleRemoveClick: (event) => {
       popupApproveDelete.open();
       popupApproveDelete.setNewFormSubmit(
         () => {
