@@ -81,4 +81,26 @@ export class Api {
     })
   }
 
+  setLike = (cardId) =>{
+    this._headers['Content-Type'] = 'application/json';
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'PUT',
+      headers: this._headers
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
+  unsetLike = (cardId) =>{
+    this._headers['Content-Type'] = 'application/json';
+    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+    .then((res) => {
+      return res.json(); // возвращаем результат работы метода и идём в следующий then
+    })
+  }
+
 }

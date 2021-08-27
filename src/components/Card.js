@@ -12,7 +12,7 @@ export class Card {
     this._handleLikeClick  = handleLikeClick;
     this._userID = userID;
     this._owner = data.owner;
-    console.log(this._likes);
+    this._status = false;
   }
 
 
@@ -27,6 +27,23 @@ export class Card {
     return this._likes ? this._likes.length : 0;
   }
 
+  setNumberOfLikes = (numberOfLikes) => {
+    this._element.querySelector('.element__like-counter').textContent = numberOfLikes;
+  }
+
+  _checkLikeStatus = () => {
+    if (this._likes.length > 0) {
+      this._likes.forEach((element) => {
+        if (element._id === this._userID) {
+          this.setLike();
+        } else {
+          this.unsetLike();
+        }
+      })
+    }
+  }
+
+
   _isCardOwner = () => {
     return this._owner._id === this._userID ? true : false;
   }
@@ -39,11 +56,14 @@ export class Card {
     this._element.setAttribute('id', this._id);
     this._image.src = this._link;
     this._image.alt = this._name + ' фото';
-    this._element.querySelector('.element__like-counter').textContent = this._getNumberOfLikes();
+    //this._element.querySelector('.element__like-counter').textContent = this._getNumberOfLikes();
+    this.setNumberOfLikes(this._getNumberOfLikes());
     if (this._isCardOwner() == false) {
       this._element.querySelector('.element__delete-icon').remove(); // Удаляем кнопку удаление, если не наша карточка
     }
+    this._checkLikeStatus();
     this._setEventListeners();
+
 
     return this._element;
   }
@@ -53,7 +73,7 @@ export class Card {
     // добавим обработчик клика по like
     this._element.querySelector('.element__like-icon').addEventListener('click', (event) => {
       //event.target.classList.toggle('element__like-icon_active');
-      this._handleLikeClick(event);
+      this._handleLikeClick(event, this._status);
     });
 
     // добавим обработчик клика по delete
@@ -70,6 +90,16 @@ export class Card {
       this._handleCardClick();
     });
 
+  }
+
+  setLike = () => {
+    this._status = true;
+    this._element.querySelector('.element__like-icon').classList.add('element__like-icon_active');
+  }
+
+  unsetLike = () => {
+    this._status = false;
+    this._element.querySelector('.element__like-icon').classList.remove('element__like-icon_active');
   }
 
   remove = () => {

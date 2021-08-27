@@ -62,8 +62,25 @@ function createCard(item) {
     handleCardClick: (event) => {
       popupWithImageNew.open(item.link, item.name);
     },
-    handleLikeClick: (event) => {
-      event.target.classList.toggle('element__like-icon_active');
+    handleLikeClick: (event, status) => {
+      //event.target.classList.toggle('element__like-icon_active');
+
+      if (status == false) {
+        api.setLike(item._id)
+          .then(res =>{
+            card.setLike();
+            card.setNumberOfLikes(res.likes.length);
+          });
+      } else {
+        api.unsetLike(item._id)
+          .then(res =>{
+            card.unsetLike();
+            card.setNumberOfLikes(res.likes.length);
+          });
+      }
+
+      //console.log(event.target);
+      //console.log(status);
     },
     handleRemoveClick: (event) => {
       popupApproveDelete.open();
