@@ -139,13 +139,17 @@ addButton.addEventListener('click', () => {
 const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
     (inputData) => {
+      renderLoading(true, formEditProfile);
       api.setUserInfo(inputData)
       .then(res =>{
         userInfo.setUserInfo(res);
       })
       .catch((err) => {
         console.log(`Ошибка ${err}`)
-      });
+      })
+      .finally(() => {
+        renderLoading(false, formEditProfile);
+      }); ;
 
 });
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
@@ -211,3 +215,9 @@ formUpdateAvatarValidator.enableValidation();
 
 const popupWithImageNew = new PopupWithImage('.popup_content_image');
 popupWithImageNew.setEventListeners();
+
+function renderLoading(isLoading, form) {
+  const submitBtn = form.querySelector('.form__submit-button');
+  //console.log(submitBtn);
+  isLoading ? submitBtn.textContent = 'Cохранение..' : submitBtn.textContent = 'Cохранить';
+}
