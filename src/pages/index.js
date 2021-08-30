@@ -39,6 +39,9 @@ api.getUserInfo()
   userInfo.setUserInfo(res);
   userInfo.setAvatar(res);
   userID = res._id;
+})
+.catch((err) => {
+  console.log(`Ошибка ${err}`)
 });
 
 // Загружаем начальные карточки с сервера
@@ -51,6 +54,9 @@ api.getInitialCards()
     },
   }, '.elements');
   defaultCardList.renderItems();
+})
+.catch((err) => {
+  console.log(`Ошибка ${err}`)
 });
 
 // Экземпляр класса UserInfo
@@ -68,12 +74,18 @@ function createCard(item) {
           .then(res =>{
             card.setLike();
             card.setNumberOfLikes(res.likes.length);
+          })
+          .catch((err) => {
+            console.log(`Ошибка ${err}`)
           });
       } else {
         api.unsetLike(item._id)
           .then(res =>{
             card.unsetLike();
             card.setNumberOfLikes(res.likes.length);
+          })
+          .catch((err) => {
+            console.log(`Ошибка ${err}`)
           });
       }
     },
@@ -84,6 +96,9 @@ function createCard(item) {
           api.deleteCard(item._id)
           .then(res =>{
             card.remove();
+          })
+          .catch((err) => {
+            console.log(`Ошибка ${err}`)
           });
         }
       )
@@ -103,6 +118,9 @@ const popupAddArticleNew = new PopupWithForm(
     .then(res =>{
       const cardElement = createCard(res);
       defaultCardList.addItem(cardElement);
+    })
+    .catch((err) => {
+      console.log(`Ошибка ${err}`)
     });
   }
 );
@@ -124,6 +142,9 @@ const popupEditProfileNew = new PopupWithForm(
       api.setUserInfo(inputData)
       .then(res =>{
         userInfo.setUserInfo(res);
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`)
       });
 
 });
@@ -148,6 +169,9 @@ const popupUpdateAvatar = new PopupWithForm(
       api.updateAvatar(inputData)
       .then(res =>{
         userInfo.setAvatar(res);
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`)
       });
 });
 // Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам

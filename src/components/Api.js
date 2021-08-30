@@ -4,15 +4,26 @@ export class Api {
     this._headers = options.headers;
   }
 
+  _checkRequestResult = (res) =>{
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    return Promise.reject(`Ошибка: ${res.status}`);
+  }
+
 
   getUserInfo = () =>{
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
     })
+    .then((res) => this._checkRequestResult(res))
+    /*
     .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
     })
+    */
   }
 
   getInitialCards() {
@@ -20,9 +31,7 @@ export class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   setUserInfo = (user) =>{
@@ -35,9 +44,7 @@ export class Api {
         about: user.about
       })
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   addCard = (card) =>{
@@ -50,9 +57,7 @@ export class Api {
         link: card.link
       })
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   deleteCard = (cardId) =>{
@@ -61,9 +66,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   updateAvatar = ({avatar}) =>{
@@ -75,9 +78,7 @@ export class Api {
       avatar: avatar
       })
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   setLike = (cardId) =>{
@@ -86,9 +87,7 @@ export class Api {
       method: 'PUT',
       headers: this._headers
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
   unsetLike = (cardId) =>{
@@ -97,9 +96,7 @@ export class Api {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) => {
-      return res.json(); // возвращаем результат работы метода и идём в следующий then
-    })
+    .then((res) => this._checkRequestResult(res))
   }
 
 }
