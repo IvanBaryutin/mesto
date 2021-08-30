@@ -20,6 +20,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import { Section } from '../components/Section.js';
 import { PopupWithImage } from '../components/PopupWithImage.js';
 import { PopupWithForm } from '../components/PopupWithForm.js';
+import { PopupWithConfirmation } from '../components/PopupWithConfirmation.js';
 import { UserInfo } from '../components/UserInfo.js';
 import { Api } from '../components/Api.js';
 
@@ -189,7 +190,7 @@ avatarEditLink.addEventListener('click', () => {
 
 
 // Экземпляр класса для попапа с кнопкой подтверждения удаления карточки, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
-const popupApproveDelete = new PopupWithForm(
+const popupApproveDelete = new PopupWithConfirmation(
   '.popup_content_confirm');
 // Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupApproveDelete.setEventListeners();
@@ -218,6 +219,5 @@ popupWithImageNew.setEventListeners();
 
 function renderLoading(isLoading, form) {
   const submitBtn = form.querySelector('.form__submit-button');
-  //console.log(submitBtn);
   isLoading ? submitBtn.textContent = 'Cохранение..' : submitBtn.textContent = 'Cохранить';
 }

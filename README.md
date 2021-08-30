@@ -24,4 +24,4 @@
 
 **Ссылка**
 
-* [Ссылка на проект в GitHub Page](https://ivanbaryutin.github.io/mesto/index.html)
+* [Ссылка на проект в GitHub Page](https://ivanbaryutin.github.io/mesto/)

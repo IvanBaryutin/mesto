@@ -56,7 +56,6 @@ export class Card {
     this._element.setAttribute('id', this._id);
     this._image.src = this._link;
     this._image.alt = this._name + ' фото';
-    //this._element.querySelector('.element__like-counter').textContent = this._getNumberOfLikes();
     this.setNumberOfLikes(this._getNumberOfLikes());
     if (this._isCardOwner() == false) {
       this._element.querySelector('.element__delete-icon').remove(); // Удаляем кнопку удаление, если не наша карточка
