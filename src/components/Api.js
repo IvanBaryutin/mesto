@@ -4,6 +4,8 @@ export class Api {
     this._headers = options.headers;
   }
 
+
+
   _checkRequestResult = (res) =>{
     if (res.ok) {
       return res.json();

@@ -16,6 +16,8 @@ export class Card {
   }
 
 
+
+
   _getTemplate = () => {
     const elementTemplate = document.querySelector(this._cardSelector).content;
     //клонируем
