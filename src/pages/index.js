@@ -46,7 +46,8 @@ Promise.all([
     userInfo.setUserInfo(userData);
     userID = userData._id;
     userInfo.setAvatar(userData);
-    defaultCardList = new Section({ data: initialCardsData.reverse(),
+    defaultCardList = new Section({
+      data: initialCardsData.reverse(),
       renderer: (item) => {
         const cardElement = createCard(item);
         defaultCardList.addItem(cardElement);
@@ -61,7 +62,7 @@ Promise.all([
 
 
 // Экземпляр класса UserInfo
-const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
+const userInfo = new UserInfo({ usernameSelector: '.profile__name', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar' });
 
 // Функция создания новой карточки, возвращает элемент <article>
 function createCard(item) {
@@ -72,7 +73,7 @@ function createCard(item) {
     handleLikeClick: (event, status) => {
       if (status == false) {
         api.setLike(item._id)
-          .then(res =>{
+          .then(res => {
             card.setLike();
             card.setNumberOfLikes(res.likes.length);
           })
@@ -81,7 +82,7 @@ function createCard(item) {
           });
       } else {
         api.unsetLike(item._id)
-          .then(res =>{
+          .then(res => {
             card.unsetLike();
             card.setNumberOfLikes(res.likes.length);
           })
@@ -95,18 +96,18 @@ function createCard(item) {
       popupApproveDelete.setNewFormSubmit(
         () => {
           api.deleteCard(item._id)
-          .then(res =>{
-            card.remove();
-            popupApproveDelete.close();
-          })
-          .catch((err) => {
-            console.log(`Ошибка ${err}`)
-          });
+            .then(res => {
+              card.remove();
+              popupApproveDelete.close();
+            })
+            .catch((err) => {
+              console.log(`Ошибка ${err}`)
+            });
         }
       )
     }
   },
-  '#element');
+    '#element');
   return card.getCardElement();
 }
 
@@ -117,14 +118,14 @@ const popupAddArticleNew = new PopupWithForm(
   '.popup_content_article',
   (inputData) => {
     api.addCard(inputData)
-    .then(res =>{
-      const cardElement = createCard(res);
-      defaultCardList.addItem(cardElement);
-      popupAddArticleNew.close();
-    })
-    .catch((err) => {
-      console.log(`Ошибка ${err}`)
-    });
+      .then(res => {
+        const cardElement = createCard(res);
+        defaultCardList.addItem(cardElement);
+        popupAddArticleNew.close();
+      })
+      .catch((err) => {
+        console.log(`Ошибка ${err}`)
+      });
   }
 );
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
@@ -141,10 +142,10 @@ addButton.addEventListener('click', () => {
 // которая по факту выполняется при сабмите формы
 const popupEditProfileNew = new PopupWithForm(
   '.popup_content_profile',
-    (inputData) => {
-      renderLoading(true, formEditProfile);
-      api.setUserInfo(inputData)
-      .then(res =>{
+  (inputData) => {
+    renderLoading(true, formEditProfile);
+    api.setUserInfo(inputData)
+      .then(res => {
         userInfo.setUserInfo(res);
         popupEditProfileNew.close();
       })
@@ -153,9 +154,9 @@ const popupEditProfileNew = new PopupWithForm(
       })
       .finally(() => {
         renderLoading(false, formEditProfile);
-      }); ;
+      });;
 
-});
+  });
 // Добавляем слушателей к папапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupEditProfileNew.setEventListeners();
 
@@ -173,15 +174,15 @@ profileEditLink.addEventListener('click', () => {
 // Экземпляр класса для попапа с формой Редактировать профиль, передаем в качестве аргумента стрелочную функцию в handleFormSubmit
 const popupUpdateAvatar = new PopupWithForm(
   '.popup_content_update',
-    (inputData) => {
-      api.updateAvatar(inputData)
-      .then(res =>{
+  (inputData) => {
+    api.updateAvatar(inputData)
+      .then(res => {
         userInfo.setAvatar(res);
       })
       .catch((err) => {
         console.log(`Ошибка ${err}`)
       });
-});
+  });
 // Добавляем слушателей к попапу с формой Добавить карточку: Сабмит, закрытие по кликам
 popupUpdateAvatar.setEventListeners();
 
@@ -211,10 +212,10 @@ profileEditLink.addEventListener('click', () => {
 const formEditProfileValidator = new FormValidator(settings, formEditProfile);
 formEditProfileValidator.enableValidation();
 
-const formAddArticleValidator= new FormValidator(settings, formAddArticle);
+const formAddArticleValidator = new FormValidator(settings, formAddArticle);
 formAddArticleValidator.enableValidation();
 
-const formUpdateAvatarValidator= new FormValidator(settings, formUpdateAvatar);
+const formUpdateAvatarValidator = new FormValidator(settings, formUpdateAvatar);
 formUpdateAvatarValidator.enableValidation();
 
 const popupWithImageNew = new PopupWithImage('.popup_content_image');

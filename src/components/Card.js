@@ -1,15 +1,15 @@
 //import showImage from '/pages/index.js';
 
 export class Card {
-  constructor(data, userID, {handleCardClick, handleLikeClick, handleRemoveClick}, cardSelector) {
+  constructor(data, userID, { handleCardClick, handleLikeClick, handleRemoveClick }, cardSelector) {
     this._name = data.name;
     this._link = data.link;
     this._likes = data.likes;
     this._id = data._id;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-    this._handleRemoveClick  = handleRemoveClick;
-    this._handleLikeClick  = handleLikeClick;
+    this._handleRemoveClick = handleRemoveClick;
+    this._handleLikeClick = handleLikeClick;
     this._userID = userID;
     this._owner = data.owner;
     this._status = false;

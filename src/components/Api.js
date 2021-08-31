@@ -6,7 +6,7 @@ export class Api {
 
 
 
-  _checkRequestResult = (res) =>{
+  _checkRequestResult = (res) => {
     if (res.ok) {
       return res.json();
     }
@@ -15,12 +15,12 @@ export class Api {
   }
 
 
-  getUserInfo = () =>{
+  getUserInfo = () => {
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'GET',
       headers: this._headers,
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
     /*
     .then((res) => {
       return res.json(); // возвращаем результат работы метода и идём в следующий then
@@ -33,10 +33,10 @@ export class Api {
       method: 'GET',
       headers: this._headers,
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  setUserInfo = (user) =>{
+  setUserInfo = (user) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/users/me`, {
       method: 'PATCH',
@@ -46,10 +46,10 @@ export class Api {
         about: user.about
       })
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  addCard = (card) =>{
+  addCard = (card) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/cards`, {
       method: 'POST',
@@ -59,46 +59,46 @@ export class Api {
         link: card.link
       })
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  deleteCard = (cardId) =>{
+  deleteCard = (cardId) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  updateAvatar = ({avatar}) =>{
+  updateAvatar = ({ avatar }) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: 'PATCH',
       headers: this._headers,
       body: JSON.stringify({
-      avatar: avatar
+        avatar: avatar
       })
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  setLike = (cardId) =>{
+  setLike = (cardId) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this._headers
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
-  unsetLike = (cardId) =>{
+  unsetLike = (cardId) => {
     this._headers['Content-Type'] = 'application/json';
     return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this._headers
     })
-    .then((res) => this._checkRequestResult(res))
+      .then((res) => this._checkRequestResult(res))
   }
 
 }
