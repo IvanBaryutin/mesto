@@ -34,6 +34,33 @@ export const api = new Api({
   }
 });
 
+
+
+// Загружаем первоначальную информация с сервера
+Promise.all([
+  api.getUserInfo(),
+  api.getInitialCards(),
+])
+  .then(([userData, initialCardsData]) => {
+    // все данные получены, отрисовываем нужные данные
+    userInfo.setUserInfo(userData);
+    userID = userData._id;
+    userInfo.setAvatar(userData);
+    defaultCardList = new Section({ data: initialCardsData.reverse(),
+      renderer: (item) => {
+        const cardElement = createCard(item);
+        defaultCardList.addItem(cardElement);
+      },
+    }, '.elements');
+    defaultCardList.renderItems();
+  })
+  .catch((err) => {
+    // попадаем сюда, если один из промисов завершится ошибкой
+    console.log(err);
+  });
+
+
+/*
 // Загружаем информацию о пользователе с сервера
 api.getUserInfo()
 .then(res =>{
@@ -59,6 +86,7 @@ api.getInitialCards()
 .catch((err) => {
   console.log(`Ошибка ${err}`)
 });
+*/
 
 // Экземпляр класса UserInfo
 const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
@@ -97,6 +125,7 @@ function createCard(item) {
           api.deleteCard(item._id)
           .then(res =>{
             card.remove();
+            popupApproveDelete.close();
           })
           .catch((err) => {
             console.log(`Ошибка ${err}`)
@@ -119,6 +148,7 @@ const popupAddArticleNew = new PopupWithForm(
     .then(res =>{
       const cardElement = createCard(res);
       defaultCardList.addItem(cardElement);
+      popupAddArticleNew.close();
     })
     .catch((err) => {
       console.log(`Ошибка ${err}`)
@@ -144,6 +174,7 @@ const popupEditProfileNew = new PopupWithForm(
       api.setUserInfo(inputData)
       .then(res =>{
         userInfo.setUserInfo(res);
+        popupEditProfileNew.close();
       })
       .catch((err) => {
         console.log(`Ошибка ${err}`)
