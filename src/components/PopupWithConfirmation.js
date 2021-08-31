@@ -20,7 +20,7 @@ export class PopupWithConfirmation extends Popup {
       // добавим вызов функции _handleFormSubmit
       // передадим ей объект — результат работы _getInputValues
       this._handleFormSubmit();
-      //this.close();
+      //this.close(); // Закрываем в then после ответа сервер, а не здесь
     });
   }
 

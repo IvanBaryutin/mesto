@@ -28,7 +28,7 @@ export class PopupWithForm extends Popup {
       // добавим вызов функции _handleFormSubmit
       // передадим ей объект — результат работы _getInputValues
       this._handleFormSubmit(this._getInputValues());
-      //this.close();
+      //this.close(); // Закрываем в then после ответа сервер, а не здесь
     });
   }
 

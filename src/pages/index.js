@@ -60,34 +60,6 @@ Promise.all([
   });
 
 
-/*
-// Загружаем информацию о пользователе с сервера
-api.getUserInfo()
-.then(res =>{
-  userInfo.setUserInfo(res);
-  userInfo.setAvatar(res);
-  userID = res._id;
-})
-.catch((err) => {
-  console.log(`Ошибка ${err}`)
-});
-
-// Загружаем начальные карточки с сервера
-api.getInitialCards()
-.then(res =>{
-  defaultCardList = new Section({ data: res.reverse(),
-    renderer: (item) => {
-      const cardElement = createCard(item);
-      defaultCardList.addItem(cardElement);
-    },
-  }, '.elements');
-  defaultCardList.renderItems();
-})
-.catch((err) => {
-  console.log(`Ошибка ${err}`)
-});
-*/
-
 // Экземпляр класса UserInfo
 const userInfo = new UserInfo({usernameSelector: '.profile__name', jobSelector: '.profile__subtitle', avatarSelector: '.profile__avatar'});
 
